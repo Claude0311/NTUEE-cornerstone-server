@@ -122,7 +122,7 @@ class Socket(socketio.ClientNamespace):
 
 
 if __name__ == '__main__':
-    myScoreboard = Scoreboard(None, '測試組')
+    myScoreboard = Scoreboard(None, '隊伍名稱')
     myScoreboard.add_UID("D0B373A2")
     myScoreboard.add_UID("E35AAAAB")
     print(myScoreboard.getCurrentScore())
