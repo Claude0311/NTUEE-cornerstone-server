@@ -2,7 +2,7 @@
 
 ## 前置作業
 
-前往此網站：https://nodejs.org/en/下載安裝node.js
+前往此網站：https://nodejs.org/en/ ，下載安裝node.js
 
 檢查Node.js及npm是否正確安裝
 
@@ -37,6 +37,6 @@ yarn dev
 
 ```
 
-啟動成功後便可以打開瀏覽器，在網址列輸入：http://localhost::3000，即可看到運行中的伺服器
+啟動成功後便可以打開瀏覽器，在網址列輸入：http://localhost::3000 ，即可看到運行中的伺服器
 
-若http://localhost::3000沒有畫面，請至cmd中輸入ipconfig查詢ipv4，將localhost改成該ipv4即可
+若 http://localhost::3000 沒有畫面，請至cmd中輸入ipconfig查詢ipv4，將localhost改成該ipv4即可
