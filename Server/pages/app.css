@@ -1,0 +1,42 @@
+html,body {
+    height: 100%;
+}
+
+#__next {
+    height: 100%;
+}
+
+.all {
+    height: 100%;
+    background-image: url(background2.jpg);
+    background-size: cover;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    color: white;
+}
+
+h1 {
+    font-weight: bolder;
+}
+
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 85%;
+}
+
+.column {
+    width: 40%;
+    height: 100%;
+}
+
+.rank {
+    color: white;
+    font-size: 24px;
+}

@@ -149,21 +149,19 @@ class HomePage extends Component {
 
     render() {
         return (
-            <Container>
-                <Row>
-                    <Col style={{ textAlign: "center" }}>
-                        <h1>Dashboard</h1>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md="12" lg="6">
+            <div className="all">
+                <div className="title">
+                    <h1>109-2 電資工程入門設計與實作 指定題</h1>
+                </div>
+                <div className="body">
+                    <div className="column">
                         <RankBoard history={this.state.history} />
-                    </Col>
-                    <Col md="12" lg="6">
+                    </div>
+                    <div className="column">
                         <Gamestat game_info={this.state} />
-                    </Col>
-                </Row>
-            </Container>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

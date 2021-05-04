@@ -52,13 +52,13 @@ export default (props) => {
                     {key+1}
                 </div>
             </td>
-            <td style={{ verticalAlign: "middle", fontSize: "20px" }}>
+            <td className="rank" style={{ verticalAlign: "middle"}}>
                 {team.name}
             </td>
-            <td style={{ verticalAlign: "middle", fontSize: "20px" }}>
+            <td className="rank" style={{ verticalAlign: "middle"}}>
                 {team.point}
             </td>
-            <td style={{ verticalAlign: "middle", fontSize: "20px" }}>
+            <td className="rank" style={{ verticalAlign: "middle"}}>
                 {team.last_eaten}
             </td>
         </tr>
@@ -67,10 +67,10 @@ export default (props) => {
         <Table>
             <thead>
                 <tr>
-                    <th>rank#</th>
-                    <th>Group Name</th>
-                    <th>Points</th>
-                    <th>Last Eaten Time</th>
+                    <th className="rank">排名</th>
+                    <th className="rank">隊名</th>
+                    <th className="rank">得分</th>
+                    <th className="rank">最終得分時間</th>
                 </tr>
             </thead>
             <tbody>{ranklist}</tbody>
