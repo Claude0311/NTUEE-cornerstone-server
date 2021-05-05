@@ -5,8 +5,7 @@ import time
 
 from score import Socket
 
-ip = "http://192.168.50.44:3000"
-# ip = "https://creative.ntuee.org"
+ip = "http://192.168.50.14:3000"
 
 def stop_game():
     g = requests.get(ip + "/game_status")
