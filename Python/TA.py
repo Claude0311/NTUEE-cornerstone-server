@@ -3,7 +3,7 @@ import requests
 import sys
 
 
-ip = "http://192.168.1.103:3000"
+ip = "http://192.168.50.83:3000"
 def stop_game():
     g = requests.get(ip+"/game_status")
     cur_team = g.json()['current_team']

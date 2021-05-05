@@ -21,7 +21,7 @@ class Scoreboard:
         self.totalScore = 0
         self.team = teamName
         self.game = 0
-        self.ip = 'http://192.168.1.103:3000'
+        self.ip = 'http://192.168.50.83:3000'
 
         print("{} wants to play Game{}!".format(self.team, self.game))
         print("connecting to server......{}".format(self.ip))
@@ -116,14 +116,11 @@ class Socket(socketio.ClientNamespace):
 
     def add_UID(self, UID_str):
         self.emit("add_UID", UID_str)
-    #secret backdoor for TA
-    def stop_game(self):
-        self.emit("stop_game")
 
 
 if __name__ == '__main__':
     myScoreboard = Scoreboard(None, '隊伍名稱')
     myScoreboard.add_UID("D0B373A2")
-    myScoreboard.add_UID("E35AAAAB")
+    myScoreboard.add_UID("929A2121")
     print(myScoreboard.getCurrentScore())
     myScoreboard.end()
