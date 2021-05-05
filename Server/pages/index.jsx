@@ -154,10 +154,10 @@ class HomePage extends Component {
                     <h1>109-2 電資工程入門設計與實作 指定題</h1>
                 </div>
                 <div className="body">
-                    <div className="column">
+                    <div className="right">
                         <RankBoard history={this.state.history} />
                     </div>
-                    <div className="column">
+                    <div className="left">
                         <Gamestat game_info={this.state} />
                     </div>
                 </div>

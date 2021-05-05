@@ -1,16 +1,17 @@
 import React from "react";
 import { Table } from "reactstrap";
 const colors = [
-    "brown",
-    "red",
-    "orange",
     "gold",
+    "silver",
+    "red",
     "green",
     "lightseagreen",
     "dodgerblue",
     "darkblue",
     "darkmagenta",
     "indigo",
+    "white",
+    "black",
 ];
 function sort_rank(team1, team2) {
     if(team2.point - team1.point !=0){
@@ -70,7 +71,7 @@ export default (props) => {
                     <th className="rank">排名</th>
                     <th className="rank">隊名</th>
                     <th className="rank">得分</th>
-                    <th className="rank">最終得分時間</th>
+                    <th className="rank">最終得分時間(秒)</th>
                 </tr>
             </thead>
             <tbody>{ranklist}</tbody>

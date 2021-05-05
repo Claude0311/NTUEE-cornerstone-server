@@ -17,13 +17,6 @@ export default (props) => {
   let minutes = Math.floor(props.time_remain / 60);
   let show_seconds = props.time_remain - minutes * 60;
   return (
-    <>
-      <ListGroupItem>
-        <h2>Time Remaining</h2>
-      </ListGroupItem>
-      <ListGroupItem>
-        {minutes} minutes {show_seconds} seconds
-      </ListGroupItem>
-    </>
+      <h2>剩餘時間: {minutes} 分 {show_seconds} 秒</h2>
   );
 };

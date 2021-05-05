@@ -31,12 +31,38 @@ h1 {
     height: 85%;
 }
 
-.column {
+.right {
     width: 40%;
     height: 100%;
+}
+
+.left {
+    width: 40%;
+    height: 100%;
+}
+
+.table {
+    margin: 10px;
+    background-color: rgba(255, 166, 0, 0.3);
 }
 
 .rank {
     color: white;
     font-size: 24px;
+}
+
+.status {
+    margin: 10px;
+    color: white;
+}
+
+.info {
+    margin: 10px;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 10px;
+    border: white 5px solid;
+    background-color: rgba(255, 166, 0, 0.3);
 }
