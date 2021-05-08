@@ -248,6 +248,25 @@ nextApp.prepare().then(() => {
 	}
     });
 
+    app.get("/modify_score", (req, res) => {
+        if (req.query.team != null && req.query.new_score != null) {
+            // TODO: modfiy score while not active
+            // can be done by modifying the history.json file right now.
+        }
+        else if (db.current_team != null && req.query.new_score != null) {
+            db.status.point = parseInt(req.query.new_score);
+            res.json( {msg: "success", new_score: db.status.point} );
+            io.emit("modify_score", {
+                team: db.current_team,
+                point: db.status.point,
+            });
+            console.log(`Score modified to ${db.status.point}`)
+        }
+        else {
+            res.json( {msg: "error", error: "game is not active."} )
+        }
+    });
+
     app.get("*", (req, res) => {
         return nextHandler(req, res);
     });

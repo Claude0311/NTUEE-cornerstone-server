@@ -88,6 +88,12 @@ class HomePage extends Component {
                 status: { ...state.status, point: data.point },
             }));
         });
+        this.socket.on("modify_score", (data) => {
+            console.log("Score modified");
+            this.setState((state) => ({
+                status: {...state.status, point: data.point},
+            }));
+        });
         this.socket.on("game_end", (data) => {
             console.log("game ended");
             clearInterval(this.timer);
