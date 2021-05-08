@@ -129,5 +129,5 @@ if __name__ == '__main__':
     import time
     myScoreboard = Scoreboard(None,'Test')
     time.sleep(3)
-    myScoreboard.add_UID("D0B373A2")
+    myScoreboard.add_UID("71A5261C")
     print(myScoreboard.getCurrentScore())
