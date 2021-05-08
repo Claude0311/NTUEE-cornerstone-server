@@ -5,7 +5,7 @@ import time
 
 from score import Socket
 
-ip = "http://192.168.50.254:3000"
+ip = "http://192.168.1.101:3000"
 
 def stop_game():
     g = requests.get(ip + "/game_status")
