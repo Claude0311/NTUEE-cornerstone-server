@@ -1,5 +1,13 @@
 # NTUEE 109-2 電資入門設計與實作 指定題伺服器
 
+## 感謝
+
+此repo內的程式碼大部分承襲自於108-2的repo:https://github.com/jchen8tw/Creative-cornerstone-dashboard?fbclid=IwAR2n9W32Mk-8h-_YJX9NxkrRlqMK45TuCzgjJqQLL4W-0hBTw6T97r6DZ90
+
+感謝108-2的助教開源程式碼
+
+109-2修改了前端，並修正了一些disconnection及TA.py的bug。
+
 ## 前置作業
 
 前往此網站：https://nodejs.org/en/ ，下載安裝node.js
@@ -56,18 +64,23 @@ python score.py
 
 在瀏覽器上應該可以看到右方出現一些資訊，並且時間開始倒數
 
-不過score.py執行完畢後雖然結束連線了，但是倒計時並不會停止
+此外，可以利用TA.py來結束遊戲、扣分及重置伺服器，請一樣先修改第6行的ip位置
 
-此時需要執行TA.py來停止計時，請一樣先修改第6行的ip位置，再輸入以下指令
+若要結束遊戲，請輸入以下指令：
 
 ```bash
 python TA.py stop
 
 ```
 
-目前這部分還有一些小bug，在輸入上述指令之後會出現error，必須按ctrl-c強制終止程式，不過server端可以看到左方排行榜更新，右方資訊重置，代表該隊伍遊戲結束
+若學生碰觸自走車，每一次扣要50分，請輸入以下指令：
 
-最後，如果要清空排行榜並重新啟動server，也可以透過TA.py
+```bash
+python TA.py deduct
+
+```
+
+若要清空排行榜並重置server，請輸入以下指令：
 
 ```bash
 python TA.py reset

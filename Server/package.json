@@ -13,7 +13,8 @@
     "react-dom": "^16.13.1",
     "reactstrap": "^8.4.1",
     "socket.io": "^4.0.2",
-    "socket.io-client": "^4.0.2"
+    "socket.io-client": "^4.0.2",
+    "antd": "^4.15.4"
   },
   "scripts": {
     "dev": "nodemon server.js",

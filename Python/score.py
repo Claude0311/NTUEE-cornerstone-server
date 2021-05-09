@@ -18,7 +18,7 @@ class Scoreboard:
     '''
     The Scoreboard class connects to the server socket and enables updating score by sending UID.
     '''
-    def __init__(self, filepath, teamName, host="http://192.168.50.254:3000"):
+    def __init__(self, filepath, teamName, host="http://192.168.1.101:3000"):
 
         # INIT VARIABLES
 
@@ -129,5 +129,5 @@ if __name__ == '__main__':
     import time
     myScoreboard = Scoreboard(None, 'TA', 'http://localhost:3000')
     time.sleep(3)
-    myScoreboard.add_UID("D0B373A2")
+    myScoreboard.add_UID("71A5261C")
     print(myScoreboard.getCurrentScore())
