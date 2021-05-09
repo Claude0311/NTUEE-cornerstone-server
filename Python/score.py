@@ -127,7 +127,7 @@ class Socket(socketio.ClientNamespace):
 
 if __name__ == '__main__':
     import time
-    myScoreboard = Scoreboard(None,'Test')
+    myScoreboard = Scoreboard(None, 'TA', 'http://localhost:3000')
     time.sleep(3)
     myScoreboard.add_UID("D0B373A2")
     print(myScoreboard.getCurrentScore())

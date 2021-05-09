@@ -39,26 +39,25 @@ class HomePage extends Component {
     // connect to WS server and listen event
     componentDidMount() {
         this.socket = io();
-        //this.socket.on("message", this.handleMessage);
+        // Timer
         if (this.state.time_remain != this.state.GAME_TIME) {
-            this.timer = setInterval(
-                () =>
-                    this.setState((state) => {
-                        if (state.time_remain > 0)
-                            return {
-                                time_remain: state.time_remain - 1,
-                            };
-                        else {
-                            clearInterval(this.timer);
-                            this.timer = null;
-                        }
-                    }),
+            this.timer = setInterval(() =>
+                this.setState((state) => {
+                    if (state.time_remain > 0)
+                        return {
+                            time_remain: state.time_remain - 1,
+                        };
+                    else {
+                        clearInterval(this.timer);
+                        this.timer = null;
+                    }
+                }),
                 1000
             );
         }
+        // game events
         this.socket.on("game_started", (data) => {
             console.log("game started");
-            //console.log(data);
             this.setState((state) => ({
                 current_team: data.current_team,
                 status: { ...state.status, gamemode: data.gamemode },
@@ -88,12 +87,6 @@ class HomePage extends Component {
                 status: { ...state.status, point: data.point },
             }));
         });
-        this.socket.on("modify_score", (data) => {
-            console.log("Score modified");
-            this.setState((state) => ({
-                status: {...state.status, point: data.point},
-            }));
-        });
         this.socket.on("game_end", (data) => {
             console.log("game ended");
             clearInterval(this.timer);
@@ -114,6 +107,22 @@ class HomePage extends Component {
                     current_team: "Nobody",
                 };
             });
+        });
+        // modify score events (TA functions)
+        this.socket.on("modify_current_score", (data) => {
+            console.log("Score modified");
+            this.setState((state) => ({
+                status: {...state.status, point: data.point},
+            }));
+        });
+        this.socket.on("modify_history_score", (data) => {
+            console.log("Score modified");
+            this.setState((state) => ({
+                history: {
+                    ...state.history,
+                    [`0`]: data.history,
+                },
+            }));
         });
     }
 
