@@ -80,6 +80,13 @@ python TA.py deduct
 
 ```
 
+若要修改已經在左側記分板上的分數，請輸入以下指令：
+
+```bash
+python TA.py set_score
+
+```
+
 若要清空排行榜並重置server，請輸入以下指令：
 
 ```bash
