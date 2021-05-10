@@ -18,7 +18,7 @@ class Scoreboard:
     '''
     The Scoreboard class connects to the server socket and enables updating score by sending UID.
     '''
-    def __init__(self, filepath, teamName, host="http://192.168.1.101:3000"):
+    def __init__(self, filepath, teamName, host="http://192.168.1.102:3000"):
 
         # INIT VARIABLES
 
@@ -49,7 +49,7 @@ class Scoreboard:
                 'team': self.team })
         elif playing_team != teamName:
             self.socket.disconnect()
-            raise ConnectionError(f"{g.json()['current_team']} is current playing.\nPlease wait {g.json()['time_remain']} seconds for retry.")                
+            raise ConnectionError(f"{res.json()['current_team']} is current playing.\nPlease wait {res.json()['time_remain']} seconds for retry.")          
 
     def add_UID(self, UID_str):
         '''Send {UID_str} to server to update score. Returns nothing.'''
@@ -127,7 +127,7 @@ class Socket(socketio.ClientNamespace):
 
 if __name__ == '__main__':
     import time
-    myScoreboard = Scoreboard(None,'Test')
+    myScoreboard = Scoreboard(None,'Test2')
     time.sleep(3)
     myScoreboard.add_UID("71A5261C")
     print(myScoreboard.getCurrentScore())
