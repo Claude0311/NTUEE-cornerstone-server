@@ -12,8 +12,8 @@ const nextHandler = nextApp.getRequestHandler();
 const uids = require("./data/uid.json");
 const sequence = require("./data/sequence.json");
 const GAME_TIME = 120;
-
 // DATABASE
+const PORT = 3000
 
 // Create database placeholder
 const db = {
@@ -107,6 +107,24 @@ function endgame(socket) {
             console.log("history filewrite complete");
         }
     });
+}
+
+const getIP = ()=>{
+    const nets = require('os').networkInterfaces()
+    const results = {}
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+            if (net.family === 'IPv4' && !net.internal) {
+                if (!results[name]) {
+                    results[name] = [];
+                }
+                results[name].push(`http://${net.address}:${PORT}`);
+            }
+        }
+    }
+    console.log(results)
+    return results
 }
 
 // socket.io server
@@ -207,6 +225,7 @@ nextApp.prepare().then(() => {
     //for nextjs client
     app.get("/game_info", (req, res) => {
         res.json({
+            ip: getIP(),
             history: db.history,
             current_team: db.current_team,
             time_remaining: db.time_remaining,
@@ -265,8 +284,8 @@ nextApp.prepare().then(() => {
         return nextHandler(req, res);
     });
 
-    server.listen(3000, (err) => {
+    server.listen(PORT,'0.0.0.0', (err) => {
         if (err) throw err;
-        console.log("> Ready on http://localhost:3000");
+        console.log(`> Ready on http://localhost:${PORT}`);
     });
 });

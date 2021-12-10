@@ -34,6 +34,7 @@ class HomePage extends Component {
         status: this.props.status,
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
+        ip:this.props.ip
     };
 
     // connect to WS server and listen event
@@ -166,7 +167,8 @@ class HomePage extends Component {
         return (
             <div className="all">
                 <div className="title">
-                    <h1>109-2 電資工程入門設計與實作 指定題</h1>
+                    <h1>109-2 電資工程入門設計與實作 指定題{"\n"}</h1><br/>
+                    <h3>{this.state.ip["Wi-Fi"][0]}</h3>
                 </div>
                 <div className="body">
                     <div className="right">
