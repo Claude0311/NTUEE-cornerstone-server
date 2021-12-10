@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
 // route the URL
 // REST API functions for the server
 nextApp.prepare().then(() => {
-    app.use(require('./router/express/index')({GAME_TIME,io}))
+    app.use(require('./router/express/index')({GAME_TIME,io,PORT}))
     
     app.get("*", (req, res) => {
         return nextHandler(req, res);

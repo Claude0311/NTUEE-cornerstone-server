@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 
-module.exports = ({GAME_TIME,io})=>{
+module.exports = ({GAME_TIME,io,PORT})=>{
     router.get("/remain_time", (req, res) => {
         res.json({ time_remain: db.time_remaining });
     });
@@ -18,7 +18,7 @@ module.exports = ({GAME_TIME,io})=>{
     //for nextjs client
     router.get("/game_info", (req, res) => {
         res.json({
-            ip: require('./getIP')(),
+            ip: require('./getIP')(PORT),
             history: db.history,
             current_team: db.current_team,
             time_remaining: db.time_remaining,
