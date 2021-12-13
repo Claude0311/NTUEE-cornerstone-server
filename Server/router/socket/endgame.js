@@ -1,5 +1,13 @@
 // endgame function
 const fs = require("fs");
+/**
+ * @api {socket} stop_game 結束遊戲
+ * @apiGroup Socket
+ * @apiDescription 結束遊戲
+ * 
+ * @apiSuccess {Socket} Socket.emit.UID_added "Add x pts at y sec"
+ * @apiSuccess {Socket} Socket.broadcast.UID_added {history, gamemode}
+ */
 module.exports = endgame = (socket) => {
     clearInterval(db.cur_game_countdown);
     console.log("game ended");
@@ -39,7 +47,7 @@ module.exports = endgame = (socket) => {
     db.status.last_eaten_time = GAME_TIME;
     db.visited = {};
     // write database from memory into file ('./data/history.json)
-    fs.writeFile("../../data/history.json", JSON.stringify(db.history), (err) => {
+    fs.writeFile("./data/history.json", JSON.stringify(db.history), (err) => {
         if (err) {
             console.log("history write error");
         } else {

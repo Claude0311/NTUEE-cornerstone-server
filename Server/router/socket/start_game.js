@@ -1,5 +1,16 @@
 const endgame = require('./endgame')
 
+/**
+ * @api {socket} start_game 開始遊戲
+ * @apiGroup Socket
+ * @apiDescription 開始遊戲，之後每秒emit update_time
+ * 
+ * @apiparam {String} gamemode (optional)
+ * @apiparam {String} team 隊名
+ * 
+ * @apiSucces (success)  {Socket} Socket.emit.game_started {current_team,gamemode}
+ * @apiSucces (fail)  {Socket} Socket.emit.game_already_started {time_remain}
+ */
 module.exports = ({io, socket})=>{
     return (data) => {
         // is there an active game?

@@ -1,7 +1,17 @@
 const fs = require("fs");
+/**
+ * @api {get} /reset 清除紀錄
+ * @apiGroup Express/TA
+ * @apiDescription 清除紀錄
+ * 
+ * @apiparam {String} pass 密碼
+ * 
+ * @apiSuccess (200) {Number} message "reset_complete"/"reset_error"
+ */
 module.exports = (req,res) => {
     if(req.query.pass === "taonly"){
-        fs.writeFile("../../data/history.json",JSON.stringify({"0":{},"1":{}}),(err)=>{
+        const toReset = {"0":{},"1":{}}
+        fs.writeFile("./data/history.json",JSON.stringify(toReset),(err)=>{
             if(!err){
                 console.log("reset_complete");
                 res.json({message: "reset_complete"});
@@ -11,6 +21,6 @@ module.exports = (req,res) => {
                 res.json({error: "reset_error"});
             }
         });
-        db.history = {"0":{},"1":{}};
+        db.history = toReset
     }
 }

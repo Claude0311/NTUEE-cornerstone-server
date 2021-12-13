@@ -1,4 +1,17 @@
-const add_UID = ({uids,db,socket})=>{
+/**
+ * @api {socket} add_UID addUID
+ * @apiGroup Socket
+ * @apiDescription 新增RFID UID
+ * @apiparam {String} uid_str 16進制8位數
+ * 
+ * @apiSuccess (uid not found) {Socket} Socket.emit.UID_added "uid not found"
+ * 
+ * @apiSuccess (uid already visited) {Socket} Socket.emit.UID_added "uid already visited."
+ * 
+ * @apiSuccess (add points) {Socket} Socket.emit.UID_added "Add x pts at y sec"
+ * @apiSuccess (add points) {Socket} Socket.broadcast.UID_added {point}
+ */
+const add_UID = ({uids,socket})=>{
     return (data) => {
         console.log("UID:",data.uid_str);
         //convert to upper case
