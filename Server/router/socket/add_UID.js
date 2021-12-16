@@ -4,12 +4,12 @@
  * @apiDescription 新增RFID UID
  * @apiparam {String} uid_str 16進制8位數
  * 
- * @apiSuccess (uid not found) {Socket} Socket.emit.UID_added "uid not found"
+ * @apiSuccess (uid not found) {Socket.emit} UID_added "uid not found"
  * 
- * @apiSuccess (uid already visited) {Socket} Socket.emit.UID_added "uid already visited."
+ * @apiSuccess (uid already visited) {Socket.emit} UID_added "uid already visited."
  * 
- * @apiSuccess (add points) {Socket} Socket.emit.UID_added "Add x pts at y sec"
- * @apiSuccess (add points) {Socket} Socket.broadcast.UID_added {point}
+ * @apiSuccess (add points) {Socket.emit} UID_added "Add x pts at y sec"
+ * @apiSuccess (add points) {Socket.broadcast} UID_added {point}
  */
 const add_UID = ({uids,socket})=>{
     return (data) => {

@@ -4,6 +4,7 @@
   "author": "Sergio Daniel Xalambrí <sergiodxa@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "antd": "^4.15.4",
     "bootstrap": "^4.4.1",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
@@ -13,12 +14,16 @@
     "react-dom": "^16.13.1",
     "reactstrap": "^8.4.1",
     "socket.io": "^4.0.2",
-    "socket.io-client": "^4.0.2",
-    "antd": "^4.15.4"
+    "socket.io-client": "^4.0.2"
   },
   "scripts": {
     "dev": "nodemon server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "doc": "apidoc -i router -o router/apidoc-out"
+  },
+  "devDependencies": {
+    "apidoc": "^0.50.2",
+    "apidoc-markdown": "^7.0.1"
   }
 }

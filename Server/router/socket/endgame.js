@@ -5,8 +5,8 @@ const fs = require("fs");
  * @apiGroup Socket
  * @apiDescription 結束遊戲
  * 
- * @apiSuccess {Socket} Socket.emit.UID_added "Add x pts at y sec"
- * @apiSuccess {Socket} Socket.broadcast.UID_added {history, gamemode}
+ * @apiSuccess {Socket.emit} UID_added "Add x pts at y sec"
+ * @apiSuccess {Socket.broadcast} UID_added {history, gamemode}
  */
 module.exports = endgame = (socket) => {
     clearInterval(db.cur_game_countdown);

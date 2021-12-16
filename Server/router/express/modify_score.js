@@ -4,19 +4,19 @@ const fs = require("fs")
  * @apiGroup Express/TA
  * @apiDescription 修改分數
  * 
- * @apiparam {String} team 隊名(未指定則修改當前分數)
+ * @apiparam {String} [team] 隊名(未指定則修改當前分數)
  * @apiparam {String} new_score 新分數
  * 
- * @apiSuccess (200) {String} msg "success"
- * @apiSuccess (200) {Number} new_score 新分數
- * @apiSuccess (200) {Socket} Socket.emit.modify_history_score {history}
+ * @apiSuccess (team given) {String} msg "success"
+ * @apiSuccess (team given) {Number} new_score 新分數
+ * @apiSuccess (team given) {Socket.emit} modify_history_score {history}
  * 
- * @apiSuccess (201) {String} msg "success"
- * @apiSuccess (201) {Number} new_score 新分數
- * @apiSuccess (201) {Socket} Socket.emit.modify_current_score {point}
+ * @apiSuccess (team not given) {String} msg "success"
+ * @apiSuccess (team not given) {Number} new_score 新分數
+ * @apiSuccess (team not given) {Socket.emit} modify_current_score {point}
  * 
- * @apiSuccess (202) {String} msg "error"
- * @apiSuccess (202) {String} error "game is not active."
+ * @apiSuccess (game not start) {String} msg "error"
+ * @apiSuccess (game not start) {String} error "game is not active."
  */
 module.exports = ({io})=>{
     return (req, res) => {

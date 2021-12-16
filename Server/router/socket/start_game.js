@@ -8,8 +8,8 @@ const endgame = require('./endgame')
  * @apiparam {String} gamemode (optional)
  * @apiparam {String} team 隊名
  * 
- * @apiSucces (success)  {Socket} Socket.emit.game_started {current_team,gamemode}
- * @apiSucces (fail)  {Socket} Socket.emit.game_already_started {time_remain}
+ * @apisuccess (success)  {Socket.emit} game_started {current_team,gamemode}
+ * @apisuccess (fail)  {Socket.emit} game_already_started {time_remain}
  */
 module.exports = ({io, socket})=>{
     return (data) => {

@@ -6,7 +6,7 @@ const fs = require("fs");
  * 
  * @apiparam {String} pass 密碼
  * 
- * @apiSuccess (200) {Number} message "reset_complete"/"reset_error"
+ * @apiSuccess (200) {String} message "reset_complete"/"reset_error"
  */
 module.exports = (req,res) => {
     if(req.query.pass === "taonly"){
