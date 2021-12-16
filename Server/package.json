@@ -23,7 +23,6 @@
     "doc": "apidoc -i router -o router/apidoc-out"
   },
   "devDependencies": {
-    "apidoc": "^0.50.2",
-    "apidoc-markdown": "^7.0.1"
+    "apidoc": "^0.50.2"
   }
 }
