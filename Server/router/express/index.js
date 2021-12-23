@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const cors = require('cors')
+const cors = require('cors'); //cors
 
 module.exports = ({ io, PORT })=>{
     /**
@@ -46,9 +46,32 @@ module.exports = ({ io, PORT })=>{
             GAME_TIME: GAME_TIME,
         });
     });
-    router.use(cors({origin:'http://localhost:4000'}))
+
+    const whitelist = ['http://localhost:3000']
+    const corsOptions = {
+    origin:function  (origin, callback) {
+        console.log('ori',origin)
+        if (whitelist.indexOf(origin) !== -1) {
+        callback(null, true)
+        } else {
+        callback(new Error('not in white list'))
+        }
+    }
+    }
+    // router.use(cors(corsOptions))
     router.get("/reset", require('./reset')({io}))
-    router.get("/modify_score", require('./modify_score')({io}));
+    router.get("/modify_score",
+        cors(corsOptions),
+        // async (req,res,next)=>{
+        //     await cors(req,res,{origin: 'http://localhost:4000'})
+        //     next()
+        // } ,
+        // (req,res,next)=>{
+        //     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
+        //     next()
+        // },
+        require('./modify_score')({io})
+    );
 
     return router
 }
