@@ -58,20 +58,17 @@ module.exports = ({ io, PORT })=>{
         }
     }
     }
-    // router.use(cors(corsOptions))
-    router.get("/reset", require('./reset')({io}))
-    router.get("/modify_score",
-        cors(corsOptions),
-        // async (req,res,next)=>{
-        //     await cors(req,res,{origin: 'http://localhost:4000'})
-        //     next()
-        // } ,
-        // (req,res,next)=>{
-        //     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
-        //     next()
-        // },
-        require('./modify_score')({io})
-    );
+
+    /////////////// TA only ///////////////
+    const isAdmin = (req,res,next)=>{
+        if(
+            req.socket.remoteAddress==='127.0.0.1' 
+            || process.env.NODE_ENV !== "production" && req.query.pass==='taonly'
+        ) next()
+        else res.status(403).send('localhost only')
+    }
+    router.get("/reset", isAdmin, require('./reset')({io}))
+    router.get("/modify_score",isAdmin, require('./modify_score')({io}))
 
     return router
 }

@@ -43,7 +43,7 @@ def deduct_point(deduction=50):
     g = requests.get(ip + "/game_info")
     score = g.json()['status']['point']
     print(f"Score before deduction: {score}")
-    g = requests.get(f"{ip}/modify_score?new_score={score - 50}")
+    g = requests.get(f"{ip}/modify_score?new_score={score - 50}&pass=taonly")
     if g.json()['msg'] == "success":
         print("Success")
     else:
@@ -60,9 +60,9 @@ def set_score(team, score):
         print(f"Score before set_score: {before_score}")
         # modify score
         if team == "":
-            g = requests.get(f"{ip}/modify_score?new_score={score}")
+            g = requests.get(f"{ip}/modify_score?new_score={score}&pass=taonly")
         else:
-            g = requests.get(f"{ip}/modify_score?team={team}&new_score={score}")
+            g = requests.get(f"{ip}/modify_score?team={team}&new_score={score}&pass=taonly")
         if g.json()['msg'] == "success":
             print("Success")
         else:

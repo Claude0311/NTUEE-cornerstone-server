@@ -10,21 +10,21 @@ const fs = require("fs");
  */
 module.exports = ({io})=>(req,res) => {
     console.log(req.query)
-    if(req.query.pass === "taonly"){
-        const toReset = {"0":{},"1":{}}
-        fs.writeFile("./data/history.json",JSON.stringify(toReset),(err)=>{
-            if(!err){
-                console.log("reset_complete");
-                res.json({message: "reset_complete"});
-            }
-            else{
-                console.log(err);
-                res.json({error: "reset_error"});
-            }
-        });
-        db.history = toReset
-        io.emit("modify_history_score", {
-            history: db.history["0"],
-        });
-    }
+    if(req.query.pass !== "taonly") return res.status(403).send('ta only')
+
+    const toReset = {"0":{},"1":{}}
+    fs.writeFile("./data/history.json",JSON.stringify(toReset),(err)=>{
+        if(!err){
+            console.log("reset_complete");
+            res.json({message: "reset_complete"});
+        }
+        else{
+            console.log(err);
+            res.json({error: "reset_error"});
+        }
+    });
+    db.history = toReset
+    io.emit("modify_history_score", {
+        history: db.history["0"],
+    });
 }

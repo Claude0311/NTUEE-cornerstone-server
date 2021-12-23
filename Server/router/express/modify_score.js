@@ -6,6 +6,7 @@ const fs = require("fs")
  * 
  * @apiparam {String} [team] 隊名(未指定則修改當前分數)
  * @apiparam {String} new_score 新分數
+ * @apiparam {String} pass 密碼
  * 
  * @apiSuccess (team given) {String} msg "success"
  * @apiSuccess (team given) {Number} new_score 新分數
@@ -19,10 +20,11 @@ const fs = require("fs")
  * @apiSuccess (game not start) {String} error "game is not active."
  */
 module.exports = ({io})=>{
-    return (req, res) => {
+    return async (req, res) => {
         // a team and score is given -> modify history
         console.log(req.query)
-        console.log(req.headers.origin)
+        if(req.query.pass !== "taonly") return res.status(403).send('ta only')
+        
         const n = ['undefined',undefined,null,'null']
         if (!n.includes(req.query.team) && !n.includes(req.query.new_score)) {
             db.history["0"][req.query.team]["point"] = req.query.new_score

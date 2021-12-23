@@ -6,11 +6,9 @@
   "dependencies": {
     "antd": "^4.15.4",
     "bootstrap": "^4.4.1",
-    "cors": "^2.8.5",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.4",
-    "nextjs-cors": "^2.1.0",
     "nodemon": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -22,6 +20,7 @@
     "dev": "nodemon server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
+    "start-win": "set NODE_ENV=production && node server.js",
     "doc": "apidoc -i router -o router/apidoc-out"
   },
   "devDependencies": {

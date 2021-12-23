@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 import { ButtonGroup, Button, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
 const onEdit = ({team,score})=>{
-    fetch(`http://localhost:3000/modify_score?team=${team}&new_score=${score}`)
+    fetch(`http://localhost:3000/modify_score?team=${team}&new_score=${score}&pass=taonly`).then(res => {
+        if(!res.ok) {
+          return res.text().then(text => { throw new Error(text) })
+         }
+        else {
+         return res.json();
+       }    
+      })
+      .catch(err => {
+         console.log('Err:',err);
+      });
 }
 
 export default ({team,point})=>{
