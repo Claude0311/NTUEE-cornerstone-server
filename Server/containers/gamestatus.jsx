@@ -1,11 +1,17 @@
 import React from "react";
-import { ListGroup, ListGroupItem, Container } from "reactstrap";
+import { ListGroup, ListGroupItem, Container, Button } from "reactstrap";
 import Countdown from "./countdown";
+import ScoreControl from "../components/ScoreControl";
+
 export default (props) => {
     const { time_remain, status, current_team } = props.game_info;
+    const socket = props.socket
     //console.log(props);
     return (
         <div className="status">
+            <Button color="danger" onClick={()=>{
+                socket.emit("stop_game")
+            }}>Stop game</Button>
             <div className="info">
                 <h2>現在隊伍: {current_team}</h2>    
             </div>
@@ -14,9 +20,20 @@ export default (props) => {
                 <Countdown time_remain={time_remain} />
             </div>
             <br></br>
-            <div className="info">
-                 <h3>得分: {status.point}</h3>
-            </div>
+            <span className="info" >
+                <h3 style={{display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',}}>
+                    得分:{' '}
+                    {true?
+                    <table style={{display:"inline-table"}}>
+                        <ScoreControl team={null} point={status.point}/>
+                    </table>
+                    :
+                    status.point
+                    }
+                </h3>
+            </span>
         </div>
     );
 };

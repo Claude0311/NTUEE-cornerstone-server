@@ -168,6 +168,8 @@ class HomePage extends Component {
             <div className="all">
                 <div className="title">
                     <h1>109-2 電資工程入門設計與實作 指定題</h1>
+                </div>
+                <div className="subtitle">
                     <h3>{this.state.ip["Wi-Fi"][0]}</h3>
                 </div>
                 <div className="body">
@@ -175,7 +177,7 @@ class HomePage extends Component {
                         <RankBoard history={this.state.history} />
                     </div>
                     <div className="left">
-                        <Gamestat game_info={this.state} />
+                        <Gamestat game_info={this.state} socket={this.socket}/>
                     </div>
                 </div>
             </div>

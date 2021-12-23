@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const cors = require('cors')
 
 module.exports = ({ io, PORT })=>{
     /**
@@ -46,8 +46,8 @@ module.exports = ({ io, PORT })=>{
             GAME_TIME: GAME_TIME,
         });
     });
-
-    router.get("/reset", require('./reset'))
+    router.use(cors({origin:'http://localhost:4000'}))
+    router.get("/reset", require('./reset')({io}))
     router.get("/modify_score", require('./modify_score')({io}));
 
     return router

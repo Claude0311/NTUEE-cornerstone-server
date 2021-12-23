@@ -8,7 +8,8 @@ const fs = require("fs");
  * 
  * @apiSuccess (200) {String} message "reset_complete"/"reset_error"
  */
-module.exports = (req,res) => {
+module.exports = ({io})=>(req,res) => {
+    console.log(req.query)
     if(req.query.pass === "taonly"){
         const toReset = {"0":{},"1":{}}
         fs.writeFile("./data/history.json",JSON.stringify(toReset),(err)=>{
@@ -22,5 +23,8 @@ module.exports = (req,res) => {
             }
         });
         db.history = toReset
+        io.emit("modify_history_score", {
+            history: db.history["0"],
+        });
     }
 }

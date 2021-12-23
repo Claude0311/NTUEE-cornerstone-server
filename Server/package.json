@@ -6,6 +6,7 @@
   "dependencies": {
     "antd": "^4.15.4",
     "bootstrap": "^4.4.1",
+    "cors": "^2.8.5",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
     "next": "^9.3.4",

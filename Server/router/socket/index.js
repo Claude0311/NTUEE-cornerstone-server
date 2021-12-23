@@ -4,6 +4,6 @@ module.exports = ({socket,uids,io})=>{
     socket.on("start_game", require('./start_game')({uids,socket,io}))
     // on "stop_game"
     socket.on("stop_game", ()=>{
-        require('./endgame')(socket)
+        require('./endgame')({socket,io})
     })
 }

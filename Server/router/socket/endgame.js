@@ -8,7 +8,7 @@ const fs = require("fs");
  * @apiSuccess {Socket.emit} game_end 
  * @apiSuccess {Socket.broadcast} game_end {history, gamemode}
  */
-module.exports = endgame = (socket) => {
+module.exports = endgame = ({socket,io}) => {
     clearInterval(db.cur_game_countdown);
     console.log("game ended");
     console.log(
@@ -31,11 +31,11 @@ module.exports = endgame = (socket) => {
         };
     }
     // broadcast "game_end" for clients to disconnect
-    socket.broadcast.emit("game_end", {
+    console.log(`gamemode ${db.status.gamemode}`)
+    io.emit("game_end", {
         history: db.history[db.status.gamemode],
         gamemode: db.status.gamemode,
     });
-    socket.emit("game_end");
     // reset the active game status
     db.current_team = null;
     db.cur_game_countdown = null;

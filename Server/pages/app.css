@@ -10,13 +10,22 @@ html,body {
     height: 100%;
     background-image: url(background.jpg);
     background-size: cover;
+    justify-content: center;
+    align-items: "center";
 }
 
 .title {
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 15%;
+    height: 10%;
+    color: white;
+}
+.subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5%;
     color: white;
 }
 

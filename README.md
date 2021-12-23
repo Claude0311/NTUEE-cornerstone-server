@@ -93,3 +93,5 @@ python TA.py set_score
 python TA.py reset
 
 ```
+
+更詳細的api doc，請參閱```/router/apidoc-out/index.html```，或看[網頁版](https://htmlpreview.github.io/?https://github.com/Claude0311/NTUEE-cornerstone-server/blob/main/Server/router/apidoc-out/index.html)

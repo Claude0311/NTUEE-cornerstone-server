@@ -21,7 +21,10 @@ const fs = require("fs")
 module.exports = ({io})=>{
     return (req, res) => {
         // a team and score is given -> modify history
-        if (req.query.team != null && req.query.new_score != null) {
+        console.log(req.query)
+        const n = ['undefined',undefined,null,'null']
+        console.log(!(req.query.new_score in n))
+        if (!n.includes(req.query.team) && !n.includes(req.query.new_score)) {
             db.history["0"][req.query.team]["point"] = req.query.new_score
             io.emit("modify_history_score", {
                 history: db.history["0"],
@@ -36,7 +39,7 @@ module.exports = ({io})=>{
             res.status(200).json( {msg: "success", new_score: db.status.point} );
         }
         // only a score is given -> modify current game score
-        else if (db.current_team != null && req.query.new_score != null) {
+        else if (!n.includes(db.current_team) && req.query.new_score != undefined) {
             db.status.point = parseInt(req.query.new_score);
             res.status(201).json( {msg: "success", new_score: db.status.point} );
             io.emit("modify_current_score", {
