@@ -8,10 +8,10 @@ export default (props) => {
         <div>
             {props.isLogin&&
                <Button color="danger" onClick={()=>{
-                    fetch("http://localhost:3000/ta/reset?pass=taonly")
+                    fetch(`${props.ip}/ta/reset?pass=taonly`)
                 }}>Clear data</Button>
             }
-            <Table history={props.history[0]} isLogin={props.isLogin}/>
+            <Table ip={props.ip} history={props.history[0]} isLogin={props.isLogin}/>
         </div>
     );
 };

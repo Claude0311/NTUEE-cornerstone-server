@@ -171,18 +171,19 @@ class HomePage extends Component {
                     <h1>109-2 電資工程入門設計與實作 指定題</h1>
                 </div>
                 <div className="subtitle">
-                    <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.state.ip["Wi-Fi"][0]}</h3>
+                    <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.state.ip}</h3>
                     <Login style={{'float':'right'}}
                         isLogin={this.state.login} 
+                        ip={this.state.ip}
                         setLogin={(s)=>this.setState({login:s})}
                     />
                 </div>
                 <div className="body">
                     <div className="right">
-                        <RankBoard history={this.state.history} isLogin={this.state.login}/>
+                        <RankBoard history={this.state.history} isLogin={this.state.login} ip={this.state.ip}/>
                     </div>
                     <div className="left">
-                        <Gamestat game_info={this.state} socket={this.socket} isLogin={this.state.login}/>
+                        <Gamestat game_info={this.state} socket={this.socket} isLogin={this.state.login} ip={this.state.ip}/>
                     </div>
                 </div>
             </div>

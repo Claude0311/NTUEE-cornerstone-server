@@ -29,7 +29,7 @@ export default (props) => {
                     得分:{' '}
                     {props.isLogin?
                     <table style={{display:"inline-table"}}>
-                        <ScoreControl team={null} point={status.point}/>
+                        <ScoreControl ip={props.ip} team={null} point={status.point}/>
                     </table>
                     :
                     status.point

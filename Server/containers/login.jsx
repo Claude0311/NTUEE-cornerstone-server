@@ -2,17 +2,18 @@ import React, { useState, useRef } from "react";
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import fetch from "isomorphic-fetch";
 
-export default ({isLogin,setLogin}) => {
+export default ({isLogin,setLogin,ip}) => {
     const [password,setP] = useState('')
     const login = ()=>{
-        fetch(`http://192.168.50.86:3000/login?pass=${password}`)
+        console.log(ip)
+        fetch(`${ip}/login?pass=${password}`)
             .then(res=>{console.log(res.ok);if(res.ok)setLogin(true)})
             .catch(e=>{console.log('e',e);alert('login fail')})
             .finally(()=>{setIn(false);setP('')})
     }
     const [isin,setIn] = useState(false);
     const logout = ()=>{
-        fetch(`http://localhost:3000/logout`)
+        fetch(`${ip}/logout`)
             .then(res=>{setLogin(false)})
             .catch(e=>{console.log('e',e)})
     }

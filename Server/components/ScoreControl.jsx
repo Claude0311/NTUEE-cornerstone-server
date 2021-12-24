@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { ButtonGroup, Button, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
-const onEdit = ({team,score})=>{
-    fetch(`http://localhost:3000/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`).then(res => {
-        if(!res.ok) {
-          return res.text().then(text => { throw new Error(text) })
-        }
-        else {
-         return res.json();
-       }    
-      })
-      .catch(err => {
-         console.log('Err:',err);
-      });
-}
 
-export default ({team,point})=>{
+export default ({team,point,ip})=>{
+    const onEdit = ({team,score})=>{
+        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`).then(res => {
+            if(!res.ok) {
+              return res.text().then(text => { throw new Error(text) })
+            }
+            else {
+             return res.json();
+           }    
+          })
+          .catch(err => {
+             console.log('Err:',err);
+          });
+    }
     const [modifying, setMod] = useState(false)
     console.log(`new point ${point}`)
     const [newScore,setScore] = useState(point)

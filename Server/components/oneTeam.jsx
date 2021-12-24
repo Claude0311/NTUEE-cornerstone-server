@@ -17,7 +17,7 @@ const colors = [
     "black",
 ];
 
-export default ({isLogin})=>(team, key) => {
+export default ({isLogin,ip})=>(team, key) => {
     return (
     <tr key={key}>
         <td>
@@ -41,7 +41,7 @@ export default ({isLogin})=>(team, key) => {
             {team.name}
         </td>
         {isLogin?
-        <ScoreControl team={team.name} point={team.point}/>
+        <ScoreControl ip={ip} team={team.name} point={team.point}/>
         :
         <td className="rank" style={{ verticalAlign: "middle"}}>
             {team.point}

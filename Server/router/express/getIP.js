@@ -13,5 +13,5 @@ module.exports = (PORT) => {
         }
     }
     // console.log(results)
-    return results
+    return results['Wi-Fi'][0]
 }
