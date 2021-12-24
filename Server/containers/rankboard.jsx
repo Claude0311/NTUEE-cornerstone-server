@@ -6,10 +6,12 @@ import fetch from "isomorphic-fetch";
 export default (props) => {
     return (
         <div>
-            <Button color="danger" onClick={()=>{
-                fetch("http://localhost:3000/reset?pass=taonly")
-            }}>Clear data</Button>
-            <Table history={props.history[0]} />
+            {props.isLogin&&
+               <Button color="danger" onClick={()=>{
+                    fetch("http://localhost:3000/ta/reset?pass=taonly")
+                }}>Clear data</Button>
+            }
+            <Table history={props.history[0]} isLogin={props.isLogin}/>
         </div>
     );
 };

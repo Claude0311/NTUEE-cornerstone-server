@@ -23,7 +23,7 @@ export default (props) => {
         });
     }
     ranklist.sort(sort_rank);
-    ranklist = ranklist.map(oneTeam);
+    ranklist = ranklist.map(oneTeam(props));
     return (
         <Table>
             <thead>
@@ -31,7 +31,9 @@ export default (props) => {
                     <th className="rank">排名</th>
                     <th className="rank">隊名</th>
                     <th className="rank">得分</th>
-                    <th className="rank">modify</th>
+                    {props.isLogin&&
+                        <th className="rank">modify</th>
+                    }
                     <th className="rank">最終得分時間(秒)</th>
                 </tr>
             </thead>

@@ -9,9 +9,11 @@ export default (props) => {
     //console.log(props);
     return (
         <div className="status">
-            <Button color="danger" onClick={()=>{
-                socket.emit("stop_game")
-            }}>Stop game</Button>
+            {props.isLogin && 
+                <Button color="danger" onClick={()=>{
+                    socket.emit("stop_game")
+                }}>Stop game</Button>
+            }
             <div className="info">
                 <h2>現在隊伍: {current_team}</h2>    
             </div>
@@ -25,7 +27,7 @@ export default (props) => {
                             alignItems: 'center',
                             justifyContent: 'center',}}>
                     得分:{' '}
-                    {true?
+                    {props.isLogin?
                     <table style={{display:"inline-table"}}>
                         <ScoreControl team={null} point={status.point}/>
                     </table>

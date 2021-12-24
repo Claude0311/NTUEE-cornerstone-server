@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import RankBoard from "../containers/rankboard";
 import Gamestat from "../containers/gamestatus";
 import { Container, Row, Col } from "reactstrap";
-
+import Login from '../containers/login'
 class HomePage extends Component {
     //fetch data from the server
     static async getInitialProps({ req }) {
@@ -34,7 +34,8 @@ class HomePage extends Component {
         status: this.props.status,
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
-        ip:this.props.ip
+        ip:this.props.ip,
+        login: false
     };
 
     // connect to WS server and listen event
@@ -172,12 +173,17 @@ class HomePage extends Component {
                 <div className="subtitle">
                     <h3>{this.state.ip["Wi-Fi"][0]}</h3>
                 </div>
+                <div>
+                    <Login 
+                        isLogin={this.state.login} 
+                        setLogin={(s)=>this.setState({login:s})}/>
+                </div>
                 <div className="body">
                     <div className="right">
-                        <RankBoard history={this.state.history} />
+                        <RankBoard history={this.state.history} isLogin={this.state.login}/>
                     </div>
                     <div className="left">
-                        <Gamestat game_info={this.state} socket={this.socket}/>
+                        <Gamestat game_info={this.state} socket={this.socket} isLogin={this.state.login}/>
                     </div>
                 </div>
             </div>
