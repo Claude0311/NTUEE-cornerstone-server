@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const cors = require('cors'); //cors
+const router = require('express').Router()
+const router_admin = require('express').Router()
+const session = require('express-session')
+const cors = require('cors')
 
 module.exports = ({ io, PORT })=>{
     /**
@@ -47,17 +49,28 @@ module.exports = ({ io, PORT })=>{
         });
     });
 
+    /////////////// session control ///////////////
+    router.use(cors({credentials: true}))
+    router.use(session({
+        name: 'cornerstone',
+        secret: 'weoignn', 
+    }))
+    router.get('/login',require('./login').login)
+    router.get('/logout',require('./login').logout)
 
     /////////////// TA only ///////////////
-    const isAdmin = (req,res,next)=>{
+    router_admin.use(require('./login').isLogin)
+    router_admin.use((req,res,next)=>{
         if(
             req.socket.remoteAddress==='127.0.0.1' 
             || process.env.NODE_ENV !== "production" && req.query.pass==='taonly'
         ) next()
         else res.status(403).send('localhost only')
-    }
-    router.get("/reset", isAdmin, require('./reset')({io}))
-    router.get("/modify_score",isAdmin, require('./modify_score')({io}))
+    })
+    router_admin.get("/reset", require('./reset')({io}))
+    router_admin.get("/modify_score", require('./modify_score')({io}))
+
+    router.use('/ta',router_admin)
 
     return router
 }
