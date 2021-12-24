@@ -47,17 +47,6 @@ module.exports = ({ io, PORT })=>{
         });
     });
 
-    const whitelist = ['http://localhost:3000']
-    const corsOptions = {
-    origin:function  (origin, callback) {
-        console.log('ori',origin)
-        if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true)
-        } else {
-        callback(new Error('not in white list'))
-        }
-    }
-    }
 
     /////////////// TA only ///////////////
     const isAdmin = (req,res,next)=>{
