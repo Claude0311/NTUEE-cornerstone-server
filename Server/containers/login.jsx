@@ -5,7 +5,7 @@ import fetch from "isomorphic-fetch";
 export default ({isLogin,setLogin}) => {
     const [password,setP] = useState('')
     const login = ()=>{
-        fetch(`http://localhost:3000/login?pass=${password}`)
+        fetch(`http://192.168.50.86:3000/login?pass=${password}`)
             .then(res=>{console.log(res.ok);if(res.ok)setLogin(true)})
             .catch(e=>{console.log('e',e);alert('login fail')})
             .finally(()=>{setIn(false);setP('')})

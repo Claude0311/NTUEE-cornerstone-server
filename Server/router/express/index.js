@@ -50,7 +50,7 @@ module.exports = ({ io, PORT })=>{
     });
 
     /////////////// session control ///////////////
-    router.use(cors({credentials: true}))
+    router.use(cors({credentials: true,origin:'*'}))
     router.use(session({
         name: 'cornerstone',
         secret: 'weoignn', 

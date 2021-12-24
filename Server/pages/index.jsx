@@ -171,7 +171,7 @@ class HomePage extends Component {
                     <h1>109-2 電資工程入門設計與實作 指定題</h1>
                 </div>
                 <div className="subtitle">
-                    <h3 style={{"margin-right":"100px","margin-left":"200px"}}>{this.state.ip["Wi-Fi"][0]}</h3>
+                    <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.state.ip["Wi-Fi"][0]}</h3>
                     <Login style={{'float':'right'}}
                         isLogin={this.state.login} 
                         setLogin={(s)=>this.setState({login:s})}
