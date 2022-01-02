@@ -1,17 +1,22 @@
 import React, { useState, useRef } from "react";
 import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import fetch from "isomorphic-fetch";
+import {useSelector, useDispatch} from 'react-redux';
 
-export default ({isLogin,setLogin,ip}) => {
+export default () => {
+    const ip = useSelector(state=>state.ip)
+    const isLogin = useSelector(state=>state.isLogin)
+    const dispatch = useDispatch()
+    const setLogin = (b)=>{dispatch({type:'login',payload:b})}
     const [password,setP] = useState('')
+    const [isTyping,setTyping] = useState(false);
+
     const login = ()=>{
-        console.log(ip)
         fetch(`${ip}/login?pass=${password}`)
             .then(res=>{console.log(res.ok);if(res.ok)setLogin(true)})
             .catch(e=>{console.log('e',e);alert('login fail')})
-            .finally(()=>{setIn(false);setP('')})
+            .finally(()=>{setTyping(false);setP('')})
     }
-    const [isin,setIn] = useState(false);
     const logout = ()=>{
         fetch(`${ip}/logout`)
             .then(res=>{setLogin(false)})
@@ -22,7 +27,7 @@ export default ({isLogin,setLogin,ip}) => {
             {isLogin?
             <Button color="danger" onClick={logout}>TA Logout</Button>
             :
-            isin ?
+            isTyping ?
             <Form inline onSubmit={(e)=>e.preventDefault()}>
                 <Input type="password"
                 placeholder="password"
@@ -33,8 +38,8 @@ export default ({isLogin,setLogin,ip}) => {
                 <Button onClick={login}>Login</Button>
             </Form>
             :
-            <Button color="danger" onClick={()=>setIn(true)}>TA Login</Button>
+            <Button color="danger" onClick={()=>setTyping(true)}>TA Login</Button>
             }
         </div>
     );
-};
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ButtonGroup, Button, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
 import ScoreControl from './ScoreControl';
+import { useSelector } from "react-redux";
 
 const colors = [
     "gold",
@@ -17,7 +18,8 @@ const colors = [
     "black",
 ];
 
-export default ({isLogin,ip})=>(team, key) => {
+export default (team, key) => {
+    const isLogin = useSelector(state=>state.isLogin)
     return (
     <tr key={key}>
         <td>
@@ -41,7 +43,7 @@ export default ({isLogin,ip})=>(team, key) => {
             {team.name}
         </td>
         {isLogin?
-        <ScoreControl ip={ip} team={team.name} point={team.point}/>
+        <ScoreControl team={team.name} point={team.point}/>
         :
         <td className="rank" style={{ verticalAlign: "middle"}}>
             {team.point}

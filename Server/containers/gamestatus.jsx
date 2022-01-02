@@ -2,14 +2,16 @@ import React from "react";
 import { ListGroup, ListGroupItem, Container, Button } from "reactstrap";
 import Countdown from "./countdown";
 import ScoreControl from "../components/ScoreControl";
+import {useSelector} from 'react-redux';
 
 export default (props) => {
     const { time_remain, status, current_team } = props.game_info;
     const socket = props.socket
+    const isLogin = useSelector(state=>state.isLogin)
     //console.log(props);
     return (
         <div className="status">
-            {props.isLogin && 
+            {isLogin && 
                 <Button color="danger" onClick={()=>{
                     socket.emit("stop_game")
                 }}>Stop game</Button>
@@ -27,9 +29,9 @@ export default (props) => {
                             alignItems: 'center',
                             justifyContent: 'center',}}>
                     得分:{' '}
-                    {props.isLogin?
+                    {isLogin?
                     <table style={{display:"inline-table"}}>
-                        <ScoreControl ip={props.ip} team={null} point={status.point}/>
+                        <ScoreControl team={null} point={status.point}/>
                     </table>
                     :
                     status.point

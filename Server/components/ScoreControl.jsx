@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ButtonGroup, Button, Input } from "reactstrap";
 import fetch from "isomorphic-fetch";
+import { useSelector } from "react-redux";
 
-export default ({team,point,ip})=>{
+export default ({team,point})=>{
+    const ip = useSelector(state=>state.ip)
     const onEdit = ({team,score})=>{
         fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`).then(res => {
             if(!res.ok) {

@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Table from "../components/table";
 import {Button} from 'reactstrap';
 import fetch from "isomorphic-fetch";
+import {useSelector} from 'react-redux';
 
 export default (props) => {
+    const isLogin = useSelector(state=>state.isLogin)
+    const ip = useSelector(state=>state.ip)
     return (
         <div>
-            {props.isLogin&&
+            {isLogin &&
                <Button color="danger" onClick={()=>{
-                    fetch(`${props.ip}/ta/reset?pass=taonly`)
+                    fetch(`${ip}/ta/reset?pass=taonly`)
                 }}>Clear data</Button>
             }
-            <Table ip={props.ip} history={props.history[0]} isLogin={props.isLogin}/>
+            <Table history={props.history[0]} />
         </div>
     );
 };

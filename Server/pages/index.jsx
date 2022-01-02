@@ -1,19 +1,29 @@
-import React, { Component, useState } from "react";
+import React, { Component} from "react";
 import io from "socket.io-client";
 import fetch from "isomorphic-fetch";
 import RankBoard from "../containers/rankboard";
 import Gamestat from "../containers/gamestatus";
 import { Container, Row, Col } from "reactstrap";
+import InitState from "../containers/InitState";
 import Login from '../containers/login'
+// import {wrapper} from '../store';
+
+//fetch data from the server
+// export const getStaticProps = wrapper.getStaticProps(store => async ({ req }) => {
+//     const response = await fetch("http://localhost:3000/game_info");
+//     const data = await response.json();
+//     // store.dispatch({type: 'setIp', payload: data.ip})
+//     // console.log(store.getState())
+//     console.log('dtat',data);
+//     return {props:data};
+// })
+
 class HomePage extends Component {
-    //fetch data from the server
     static async getInitialProps({ req }) {
         const response = await fetch("http://localhost:3000/game_info");
         const data = await response.json();
-        //console.log(data);
         return data;
     }
-
     static defaultProps = {
         time_remain: 120,
         current_team: "Nobody",
@@ -35,7 +45,6 @@ class HomePage extends Component {
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
         ip:this.props.ip,
-        login: false
     };
 
     // connect to WS server and listen event
@@ -172,18 +181,15 @@ class HomePage extends Component {
                 </div>
                 <div className="subtitle">
                     <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.state.ip}</h3>
-                    <Login style={{'float':'right'}}
-                        isLogin={this.state.login} 
-                        ip={this.state.ip}
-                        setLogin={(s)=>this.setState({login:s})}
-                    />
+                    <Login style={{'float':'right'}}/>
+                    <InitState ip={this.state.ip}/>
                 </div>
                 <div className="body">
                     <div className="right">
-                        <RankBoard history={this.state.history} isLogin={this.state.login} ip={this.state.ip}/>
+                        <RankBoard history={this.state.history}/>
                     </div>
                     <div className="left">
-                        <Gamestat game_info={this.state} socket={this.socket} isLogin={this.state.login} ip={this.state.ip}/>
+                        <Gamestat game_info={this.state} socket={this.socket}/>
                     </div>
                 </div>
             </div>

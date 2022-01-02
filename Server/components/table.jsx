@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Table } from "reactstrap";
 import oneTeam from "./oneTeam";
 
@@ -11,7 +12,7 @@ function sort_rank(team1, team2) {
     }
 }
 export default (props) => {
-    //console.log(props)
+    const isLogin = useSelector(state=>state.isLogin)
     const { history } = props;
     let ranklist = [];
     for (let team in history) {
@@ -23,7 +24,7 @@ export default (props) => {
         });
     }
     ranklist.sort(sort_rank);
-    ranklist = ranklist.map(oneTeam(props));
+    ranklist = ranklist.map(oneTeam);
     return (
         <Table>
             <thead>
@@ -31,7 +32,7 @@ export default (props) => {
                     <th className="rank">排名</th>
                     <th className="rank">隊名</th>
                     <th className="rank">得分</th>
-                    {props.isLogin&&
+                    {isLogin &&
                         <th className="rank">modify</th>
                     }
                     <th className="rank">最終得分時間(秒)</th>
