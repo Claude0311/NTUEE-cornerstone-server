@@ -7,12 +7,12 @@ export default () => {
     const ip = useSelector(state=>state.ip)
     const isLogin = useSelector(state=>state.isLogin)
     const dispatch = useDispatch()
-    const setLogin = (b)=>{dispatch({type:'login',payload:b})}
+    const setLogin = (payload)=>{dispatch({type:'login',payload})}
     const [password,setP] = useState('')
     const [isTyping,setTyping] = useState(false);
 
     const login = ()=>{
-        fetch(`${ip}/login?pass=${password}`)
+        fetch(`${ip}/login?pass=${password}`, {credentials: 'same-origin'})
             .then(res=>{console.log(res.ok);if(res.ok)setLogin(true)})
             .catch(e=>{console.log('e',e);alert('login fail')})
             .finally(()=>{setTyping(false);setP('')})

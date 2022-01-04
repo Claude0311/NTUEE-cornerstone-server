@@ -1,5 +1,5 @@
 module.exports = ({socket,uids,io})=>{
-    socket.on("add_UID", require('./add_UID')({uids,socket}))
+    socket.on("add_UID", require('./add_uid')({uids,socket}))
     // on "start_game"
     socket.on("start_game", require('./start_game')({uids,socket,io}))
     // on "stop_game"

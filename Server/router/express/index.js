@@ -40,7 +40,7 @@ module.exports = ({ io, PORT })=>{
      */
     router.get("/game_info", (req, res) => {
         res.json({
-            ip: require('./getIP')(PORT),
+            ip: require('./get_ip')(PORT),
             history: db.history,
             current_team: db.current_team,
             time_remaining: db.time_remaining,
@@ -60,13 +60,6 @@ module.exports = ({ io, PORT })=>{
 
     /////////////// TA only ///////////////
     router_admin.use(require('./login').isLogin)
-    router_admin.use((req,res,next)=>{
-        if(
-            req.socket.remoteAddress==='127.0.0.1' 
-            || process.env.NODE_ENV !== "production" && req.query.pass==='taonly'
-        ) next()
-        else res.status(403).send('localhost only')
-    })
     router_admin.get("/reset", require('./reset')({io}))
     router_admin.get("/modify_score", require('./modify_score')({io}))
 

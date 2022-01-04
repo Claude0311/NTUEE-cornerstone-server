@@ -17,7 +17,7 @@ module.exports.logout = (req,res)=>{
 }
 
 module.exports.isLogin = (req,res,next)=>{
-    console.log('isLogin',req.session.isLogin)
+    console.log('isLogin',req.session)
     if(
         req.session.isLogin
         || process.env.NODE_ENV !== "production"

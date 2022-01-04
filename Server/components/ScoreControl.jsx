@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 export default ({team,point})=>{
     const ip = useSelector(state=>state.ip)
     const onEdit = ({team,score})=>{
-        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`).then(res => {
+        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`,
+            {credentials: 'same-origin'}
+        ).then(res => {
             if(!res.ok) {
               return res.text().then(text => { throw new Error(text) })
             }

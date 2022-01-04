@@ -28,6 +28,8 @@ io.on("connection", (socket) => {
 nextApp.prepare().then(() => {
     //router
     app.use(require('./router/express/index')({ io, PORT }))
+
+    app.get('/test',(req,res)=>{res.send('hello')})
     
     app.get("*", (req, res) => {
         return nextHandler(req, res);
@@ -35,6 +37,7 @@ nextApp.prepare().then(() => {
 
     server.listen(PORT,'0.0.0.0', (err) => {
         if (err) throw err;
+        console.log('dev',dev)
         console.log(`> Ready on http://localhost:${PORT}`);
     });
 });

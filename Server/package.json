@@ -27,6 +27,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start-win": "set NODE_ENV=production && node server.js",
+    "st": "next start",
     "doc": "apidoc -i router -o router/apidoc-out"
   },
   "devDependencies": {
