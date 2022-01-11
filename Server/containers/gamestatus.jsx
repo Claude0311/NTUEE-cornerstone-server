@@ -8,12 +8,13 @@ export default (props) => {
     const { time_remain, status, current_team } = props.game_info;
     const socket = props.socket
     const isLogin = useSelector(state=>state.isLogin)
+    const token = useSelector(state=>state.token)
     //console.log(props);
     return (
         <div className="status">
             {isLogin && 
                 <Button color="danger" onClick={()=>{
-                    socket.emit("stop_game")
+                    socket.emit("stop_game",{token})
                 }}>Stop game</Button>
             }
             <div className="info">

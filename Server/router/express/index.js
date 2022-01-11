@@ -1,9 +1,12 @@
 const router = require('express').Router()
 const router_admin = require('express').Router()
-const session = require('express-session')
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const cookieParser = require("cookie-parser")
 
 module.exports = ({ io, PORT })=>{
+    router.use(bodyParser.urlencoded({ extended: true }))
+	router.use(bodyParser.json())
     /**
      * @api {get} /remain_time 剩餘時間
      * @apiGroup Express/GameInfo
@@ -50,16 +53,18 @@ module.exports = ({ io, PORT })=>{
     });
 
     /////////////// session control ///////////////
-    router.use(cors({credentials: true,origin:'*'}))
-    router.use(session({
-        name: 'cornerstone',
-        secret: 'weoignn', 
-    }))
-    router.get('/login',require('./login').login)
-    router.get('/logout',require('./login').logout)
+    const {isLogin, login} = require('./login')
+    
+    router_admin.use(cors())
+    router_admin.use(cookieParser())
+    router_admin.post('/login',login)
+    router_admin.get('/isLogin',isLogin,(req,res)=>{
+        const token = req.acc_token
+        res.json({token})
+    })
 
     /////////////// TA only ///////////////
-    router_admin.use(require('./login').isLogin)
+    router_admin.use(isLogin)
     router_admin.get("/reset", require('./reset')({io}))
     router_admin.get("/modify_score", require('./modify_score')({io}))
 

@@ -1,26 +1,23 @@
 const SHA256 = require("crypto-js/sha256")
+const jwt = require("jsonwebtoken")
 
 module.exports.login = (req,res)=>{
-    const password = req.query.pass
+    const password = req.body.pass
     const secure_pass = SHA256(password).toString();
     console.log('login fail =',secure_pass!=='7c344f977d4878c0f7a8f115eac7f19af82642917c55cc686b777a829ba0c1f2')
     if (secure_pass!=='7c344f977d4878c0f7a8f115eac7f19af82642917c55cc686b777a829ba0c1f2') return res.status(404).send('wrong password')
-    req.session.isLogin = true
-    res.send('login success')
-}
-
-module.exports.logout = (req,res)=>{
-    req.session.destroy(err=>{
-        if(err) return res.status(404).send('logout fail')
-        res.send('logout success')
-    })
+    const token = jwt.sign({ password }, jwt_secret_key, {expiresIn: '1d'})
+    res.json({token})
 }
 
 module.exports.isLogin = (req,res,next)=>{
-    console.log('isLogin',req.session)
-    if(
-        req.session.isLogin
-        || process.env.NODE_ENV !== "production"
-    ) return next()
-    return res.status(403).send('not login')
+    const token = req.query.token || req.cookies.token
+    jwt.verify(token, jwt_secret_key, (err, decoded) => {
+        if(
+            err
+            //  && process.env.NODE_ENV === "production"
+        ) return res.status(403).send('not login')
+        req.acc_token = token
+        next()
+    })
 }

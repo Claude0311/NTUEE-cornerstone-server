@@ -6,6 +6,8 @@ import Gamestat from "../containers/gamestatus";
 import { Container, Row, Col } from "reactstrap";
 import InitState from "../containers/InitState";
 import Login from '../containers/login'
+import Cookies from 'js-cookie'
+
 // import {wrapper} from '../store';
 
 //fetch data from the server
@@ -20,9 +22,17 @@ import Login from '../containers/login'
 
 class HomePage extends Component {
     static async getInitialProps({ req }) {
+        let token = ''
+        try{
+            console.log(req.headers.cookie)
+            const res = await fetch('http://localhost:3000/ta/isLogin',{headers:{cookie:req.headers.cookie}})
+            if(res.ok) {
+                token = await res.json().token
+            }
+        }catch{}
         const response = await fetch("http://localhost:3000/game_info");
         const data = await response.json();
-        return data;
+        return {...data,token};
     }
     static defaultProps = {
         time_remain: 120,
@@ -44,7 +54,6 @@ class HomePage extends Component {
         status: this.props.status,
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
-        ip:this.props.ip,
     };
 
     // connect to WS server and listen event
@@ -180,9 +189,9 @@ class HomePage extends Component {
                     <h1>109-2 電資工程入門設計與實作 指定題</h1>
                 </div>
                 <div className="subtitle">
-                    <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.state.ip}</h3>
+                    <h3 style={{"marginRight":"100px","marginLeft":"200px"}}>{this.props.ip}</h3>
                     <Login style={{'float':'right'}}/>
-                    <InitState ip={this.state.ip}/>
+                    <InitState ip={this.props.ip} token={this.props.token}/>
                 </div>
                 <div className="body">
                     <div className="right">

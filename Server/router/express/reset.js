@@ -4,14 +4,11 @@ const fs = require("fs");
  * @apiGroup Express/TA
  * @apiDescription 清除紀錄
  * 
- * @apiparam {String} pass 密碼
+ * @apiparam {String} token token from login
  * 
  * @apiSuccess (200) {String} message "reset_complete"/"reset_error"
  */
 module.exports = ({io})=>(req,res) => {
-    console.log(req.query)
-    if(req.query.pass !== "taonly") return res.status(403).send('ta only')
-
     const toReset = {"0":{},"1":{}}
     fs.writeFile("./data/history.json",JSON.stringify(toReset),(err)=>{
         if(!err){

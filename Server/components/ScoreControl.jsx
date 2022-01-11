@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { ButtonGroup, Button, Input } from "reactstrap";
-import fetch from "isomorphic-fetch";
+// import fetch from "isomorphic-fetch";
 import { useSelector } from "react-redux";
 
 export default ({team,point})=>{
     const ip = useSelector(state=>state.ip)
+    const token = useSelector(state=>state.token)
     const onEdit = ({team,score})=>{
-        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&pass=taonly`,
-            {credentials: 'same-origin'}
-        ).then(res => {
+        console.log('tks',token)
+        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&token=${token}`)
+        .then(res => {
             if(!res.ok) {
               return res.text().then(text => { throw new Error(text) })
             }
             else {
              return res.json();
-           }    
+           }
           })
           .catch(err => {
              console.log('Err:',err);

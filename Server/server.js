@@ -11,10 +11,12 @@ const nextHandler = nextApp.getRequestHandler();
 
 // data
 const uids = require("./data/uid.json");
-const sequence = require("./data/sequence.json");
+// const sequence = require("./data/sequence.json");
 global.GAME_TIME = 120;
 global.db = require("./data/sample") // placeholder
 db.history = JSON.parse(fs.readFileSync("./data/history.json", "utf-8"))
+const keygen = require("keygenerator");
+global.jwt_secret_key = keygen._()
 
 // socket.io server
 io.on("connection", (socket) => {
