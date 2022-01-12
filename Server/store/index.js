@@ -1,10 +1,10 @@
 import {createStore} from 'redux';
 import {createWrapper} from 'next-redux-wrapper';
-
+const env = process.env.forstu
 // create your reducer
 const reducer = (state = {
   ip: 'http://localhost:300',
-  isLogin: false,
+  isLogin: env==='y',
   token: ''
 }, action) => {
   switch (action.type) {

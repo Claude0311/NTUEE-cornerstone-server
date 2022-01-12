@@ -1,23 +1,15 @@
-FROM node:lts as dependencies
-WORKDIR /my-project
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-FROM node:lts as builder
-WORKDIR /my-project
+FROM node:16.13-alpine
+WORKDIR /app
+# Install app dependencies
+COPY package*.json ./
+RUN yarn install
+# Bundle app source
 COPY . .
-COPY --from=dependencies /my-project/node_modules ./node_modules
-RUN yarn build
-
-FROM node:lts as runner
-WORKDIR /my-project
-ENV NODE_ENV production
-# If you are using a custom next.config.js file, uncomment this line.
-# COPY --from=builder /my-project/next.config.js ./
-# COPY --from=builder /my-project/public ./public
-COPY --from=builder /my-project/.next ./.next
-COPY --from=builder /my-project/node_modules ./node_modules
-COPY --from=builder /my-project/package.json ./package.json
+ENV PORT=3000
+ENV NODE_ENV=production
+ENV forstu=n
+ENV wifi=Wi-Fi
 
 EXPOSE 3000
-CMD ["yarn", "st"]
+RUN yarn build
+CMD [ "node", "server.js" ]

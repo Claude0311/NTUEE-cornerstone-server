@@ -10,12 +10,13 @@ module.exports.login = (req,res)=>{
     res.json({token})
 }
 
+require('dotenv').config()
 module.exports.isLogin = (req,res,next)=>{
     const token = req.query.token || req.cookies.token
     jwt.verify(token, jwt_secret_key, (err, decoded) => {
         if(
             err
-            //  && process.env.NODE_ENV === "production"
+             && process.env.forstu !== "y"
         ) return res.status(403).send('not login')
         req.acc_token = token
         next()

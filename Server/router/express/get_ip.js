@@ -1,17 +1,27 @@
+require('dotenv').config()
+
 module.exports = (PORT) => {
-    const nets = require('os').networkInterfaces()
-    const results = {}
-    for (const name of Object.keys(nets)) {
-        for (const net of nets[name]) {
-            // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
-            if (net.family === 'IPv4' && !net.internal) {
-                if (!results[name]) {
-                    results[name] = [];
+    try{
+        const nets = require('os').networkInterfaces()
+        const results = {}
+        for (const name of Object.keys(nets)) {
+            for (const net of nets[name]) {
+                // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+                if (net.family === 'IPv4' && !net.internal) {
+                    if (!results[name]) {
+                        results[name] = [];
+                    }
+                    results[name].push(`http://${net.address}:${PORT}`);
                 }
-                results[name].push(`http://${net.address}:${PORT}`);
             }
         }
+        console.log(results)
+        const wifi = process.env["wifi"] || 'Wi-Fi'
+        return results[wifi][0]
+    }catch (e){
+        console.log('no wifi connection')
+        console.log('########### catching ###########')
+        console.log(e)
+        return 'http://localhost:3000'
     }
-    // console.log(results)
-    return results['Wi-Fi'][0]
 }

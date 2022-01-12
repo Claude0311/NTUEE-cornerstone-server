@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+require('dotenv').config()
 
 module.exports = ({socket,uids,io})=>{
     socket.on("add_UID", require('./add_uid')({uids,socket}))
@@ -10,7 +11,7 @@ module.exports = ({socket,uids,io})=>{
             jwt.verify(token, jwt_secret_key, (err, decoded) => {
                 if(
                     err
-                    //  && process.env.NODE_ENV === "production"
+                     && process.env.forstu !== "y"
                 ) return
                 require('./endgame')({socket,io})
             })
