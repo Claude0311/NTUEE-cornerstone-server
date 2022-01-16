@@ -1,5 +1,3 @@
-import pandas
-import numpy as np
 import requests
 import socketio
 import sys
