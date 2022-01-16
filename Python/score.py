@@ -18,15 +18,13 @@ class Scoreboard:
     '''
     The Scoreboard class connects to the server socket and enables updating score by sending UID.
     '''
-    def __init__(self, filepath, teamName, host="http://192.168.1.102:3000"):
+    def __init__(self, teamName, host="http://192.168.50.163:3000"):
 
         # INIT VARIABLES
-
         self.totalScore = 0
         self.team = teamName
         self.game = 0
         self.ip = host
-        #self.ip = 'https://creative.ntuee.org'
 
         print(f"{self.team} wants to play!")
         print(f"connecting to server......{self.ip}")
@@ -119,15 +117,10 @@ class Socket(socketio.ClientNamespace):
 
     def add_UID(self, UID_str):
         self.emit("add_UID", UID_str)
-         
-    #secret backdoor for TA
-    def stop_game(self):
-        self.emit("stop_game")
-
 
 if __name__ == '__main__':
     import time
-    myScoreboard = Scoreboard(None,'Test1',"http://localhost:3000")
+    myScoreboard = Scoreboard('Test1',"http://localhost:3000")
     time.sleep(3)
     myScoreboard.add_UID("71A5261C")
     print(myScoreboard.getCurrentScore())
