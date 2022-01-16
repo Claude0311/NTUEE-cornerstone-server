@@ -24,7 +24,6 @@ export default (props) => {
         });
     }
     ranklist.sort(sort_rank);
-    ranklist = ranklist.map(oneTeam);
     return (
         <Table>
             <thead>
@@ -38,7 +37,7 @@ export default (props) => {
                     <th className="rank">最終得分時間(秒)</th>
                 </tr>
             </thead>
-            <tbody>{ranklist}</tbody>
+            <tbody>{ranklist.map(oneTeam)}</tbody>
         </Table>
     );
 };
