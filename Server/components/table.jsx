@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Table } from "reactstrap";
-import oneTeam from "./oneTeam";
+import OneTeam from "./oneTeam";
 
 function sort_rank(team1, team2) {
     if(team2.point - team1.point !=0){
@@ -37,7 +37,12 @@ export default (props) => {
                     <th className="rank">最終得分時間(秒)</th>
                 </tr>
             </thead>
-            <tbody>{ranklist.map(oneTeam)}</tbody>
+            <tbody>{ranklist.map((team,key)=>{
+                console.log('key',key)
+            return (<OneTeam
+                team={team} tbkey={key} isLogin={isLogin}
+            />)
+            })}</tbody>
         </Table>
     );
 };

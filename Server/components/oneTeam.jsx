@@ -18,8 +18,8 @@ const colors = [
     "black",
 ];
 
-export default (team, key) => {
-    const isLogin = useSelector(state=>state.isLogin)
+export default ({team, tbkey:key, isLogin}) => {
+    // const isLogin = useSelector(state=>state.isLogin)
     return (
     <tr key={key}>
         <td>
