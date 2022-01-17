@@ -37,12 +37,9 @@ export default (props) => {
                     <th className="rank">最終得分時間(秒)</th>
                 </tr>
             </thead>
-            <tbody>{ranklist.map((team,key)=>{
-                console.log('key',key)
-            return (<OneTeam
+            <tbody>{ranklist.map((team,key)=><OneTeam
                 team={team} tbkey={key} isLogin={isLogin}
-            />)
-            })}</tbody>
+            />)}</tbody>
         </Table>
     );
 };
