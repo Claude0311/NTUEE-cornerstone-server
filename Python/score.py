@@ -2,9 +2,13 @@ import requests
 import socketio
 import sys
 
-
+# This file is for remote server, differ from the score.py in sample_code.zip, which is for local testing
 # ================================================================
 # Scoreboard
+#   __init__(self, filepath, teamName, host="http://140.112.175.15:3000")
+#     filepath: not used, just give me a random string
+#     teamName: specify your teamName, this will be shown on the server
+#     host: default http://140.112.175.15:3000, open this link to check if the server is on
 #   add_UID(UID_str)
 #     UID_str : UID string ("0x" excluded)
 #   getCurrentScore()
@@ -16,7 +20,7 @@ class Scoreboard:
     '''
     The Scoreboard class connects to the server socket and enables updating score by sending UID.
     '''
-    def __init__(self, filepath, teamName, host="http://192.168.50.163:3000"):
+    def __init__(self, filepath, teamName, host="http://140.112.175.15:3000"):
     
         # INIT VARIABLES
         self.totalScore = 0
