@@ -29,5 +29,5 @@
 // console.log(results)
 // // return results
 const SHA256 = require("crypto-js/sha256")
-const password = "corner"
+const password = ""
 console.log(SHA256(password).toString())
