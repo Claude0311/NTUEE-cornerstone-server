@@ -22,7 +22,7 @@ module.exports = endgame = ({socket,io}) => {
         (db.history[db.status.gamemode][db.current_team].point ==
             db.status.point &&
             db.history[db.status.gamemode][db.current_team].last_eaten_time <
-                db.status.point)
+                db.status.last_eaten_time)
     ) {
         db.history[db.status.gamemode][db.current_team] = {
             point: db.status.point,

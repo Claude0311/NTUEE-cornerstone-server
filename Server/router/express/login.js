@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken")
 module.exports.login = (req,res)=>{
     const password = req.body.pass
     const secure_pass = SHA256(password).toString();
-    console.log('login fail =',secure_pass!=='7c344f977d4878c0f7a8f115eac7f19af82642917c55cc686b777a829ba0c1f2')
-    if (secure_pass!=='7c344f977d4878c0f7a8f115eac7f19af82642917c55cc686b777a829ba0c1f2') return res.status(404).send('wrong password')
+    console.log('login fail =',secure_pass!=='45d227c4b297a0ba4ce42738ad3d448e19628a5ecfd509ea861b24a23009d08e')
+    if (secure_pass!=='45d227c4b297a0ba4ce42738ad3d448e19628a5ecfd509ea861b24a23009d08e') return res.status(404).send('wrong password')
     const token = jwt.sign({ password }, jwt_secret_key, {expiresIn: '1d'})
     res.json({token})
 }
