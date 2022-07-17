@@ -12,7 +12,7 @@ const nextHandler = nextApp.getRequestHandler();
 // data
 const uids = require("./data/uid.json");
 // const sequence = require("./data/sequence.json");
-global.GAME_TIME = 10;
+global.GAME_TIME = 90;
 global.db = require("./data/sample") // placeholder
 db.history = JSON.parse(fs.readFileSync("./data/history.json", "utf-8"))
 const keygen = require("keygenerator");

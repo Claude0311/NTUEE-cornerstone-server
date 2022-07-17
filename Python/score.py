@@ -2,7 +2,6 @@ import requests
 import socketio
 import sys
 
-# This file is for remote server, differ from the score.py in sample_code.zip, which is for local testing
 # ================================================================
 # Scoreboard
 #   __init__(filepath, teamName, host="http://140.112.175.15:3000")
