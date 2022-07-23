@@ -37,14 +37,17 @@ module.exports = ({io})=>{
             });
             res.status(200).json( {msg: "success", new_score: db.status.point} );
         }
-        // only a score is given -> modify current game score
-        else if (!n.includes(db.current_team) && !n.includes(req.query.new_score)) {
-            db.status.point = parseInt(req.query.new_score);
-            res.status(201).json( {msg: "success", new_score: db.status.point} );
+        // an id and score is given -> modify current game score
+        else if (!n.includes(req.query.id) && !n.includes(req.query.new_score)) {
+            const team = db.current.find(({id})=>id===req.query.id)
+            team.status.point = parseInt(req.query.new_score);
+            res.status(201).json( {msg: "success", new_score: team.status.point} );
             io.emit("modify_current_score", {
-                point: db.status.point,
+                id: team.id,
+                point: team.status.point,
             });
-            console.log(`Score modified to ${db.status.point}`)
+            console.log(`Score modified to ${team.status.point}`)
+            db.current = db.current.map(data => data.id === team.id ? team : data)
         }
         // other conditions -> error
         else {

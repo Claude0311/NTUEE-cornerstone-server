@@ -32,9 +32,11 @@ class HomePage extends Component {
         }catch{}
         const response = await fetch("http://localhost:3000/game_info");
         const data = await response.json();
+        console.log('data',data)
         return {...data,token};
     }
     static defaultProps = {
+        current:[],
         time_remain: 120,
         current_team: "Nobody",
         status: {
@@ -49,6 +51,7 @@ class HomePage extends Component {
 
     // init state with the prefetched messages
     state = {
+        current: this.props.current,
         time_remain: this.props.time_remaining,
         current_team: this.props.current_team,
         status: this.props.status,

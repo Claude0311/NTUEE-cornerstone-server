@@ -5,40 +5,46 @@ import ScoreControl from "../components/ScoreControl";
 import {useSelector} from 'react-redux';
 
 export default (props) => {
-    const { time_remain, status, current_team } = props.game_info;
+    const current = [{ time_remain:90, status:{point:0}, current_team:"Nobody" },{ time_remain:90, status:{point:0}, current_team:"Nobody" },{ time_remain:90, status:{point:0}, current_team:"Nobody" }]
+    const { GAME_TIME } = props.game_info;
     const socket = props.socket
     const isLogin = useSelector(state=>state.isLogin)
     const token = useSelector(state=>state.token)
-    //console.log(props);
+    const blkGen = ({ time_remain, status, current_team })=><>
+        {isLogin && 
+            <Button color="danger" onClick={()=>{
+                socket.emit("stop_game",{token})
+            }}>Stop game</Button>
+        }
+        <div className="info">
+            <h2>現在隊伍: {current_team}</h2>    
+        </div>
+        <div className="info">
+            <Countdown time_remain={time_remain} />
+        </div>
+        <span className="info" >
+            <h3 style={{display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',}}>
+                得分:{' '}
+                {isLogin?
+                <table style={{display:"inline-table"}}>
+                    <ScoreControl team={null} point={status.point}/>
+                </table>
+                :
+                status.point
+                }
+            </h3>
+        </span>
+        <br></br>
+    </>
     return (
         <div className="status">
-            {isLogin && 
-                <Button color="danger" onClick={()=>{
-                    socket.emit("stop_game",{token})
-                }}>Stop game</Button>
+            {
+                current.length===0?
+                blkGen({ time_remain:GAME_TIME, status:{point:0}, current_team:"Nobody" }):
+                current.map(blkGen)
             }
-            <div className="info">
-                <h2>現在隊伍: {current_team}</h2>    
-            </div>
-            <br></br>
-            <div className="info">
-                <Countdown time_remain={time_remain} />
-            </div>
-            <br></br>
-            <span className="info" >
-                <h3 style={{display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',}}>
-                    得分:{' '}
-                    {isLogin?
-                    <table style={{display:"inline-table"}}>
-                        <ScoreControl team={null} point={status.point}/>
-                    </table>
-                    :
-                    status.point
-                    }
-                </h3>
-            </span>
         </div>
     );
 };

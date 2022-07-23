@@ -13,7 +13,8 @@ module.exports = ({ io, PORT })=>{
      * @apiSuccess (200) {Number} time_remain 剩餘時間
      */
     router.get("/remain_time", (req, res) => {
-        res.json({ time_remain: db.time_remaining });
+        if(db.current.length<1) return res.json({ time_remain: GAME_TIME });
+        res.json({ time_remain: db.current[0].time_remaining });
     });
     /**
      * @api {get} /current_score 目前分數
@@ -21,7 +22,8 @@ module.exports = ({ io, PORT })=>{
      * @apiSuccess (200) {Number} current_score 分數
      */
     router.get("/current_score", (req, res) => {
-        res.json({ current_score: db.status.point });
+        if(db.current.length<1) return res.json({ current_score: 0 });
+        res.json({ current_score: db.current[0].status.point });
     });
     /**
      * @api {get} /game_status 分數和時間
@@ -30,9 +32,10 @@ module.exports = ({ io, PORT })=>{
      * @apiSuccess (200) {Number} current_score 分數
      */
     router.get("/game_status", (req, res) => {
+        if(db.current.length<1) return res.json({ current_team: "NONE", time_remain: GAME_TIME})
         res.json({
-            current_team: db.current_team,
-            time_remain: db.time_remaining,
+            current_team: db.current[0].current_team,
+            time_remain: db.current[0].time_remaining,
         });
     });
     /**
@@ -45,9 +48,7 @@ module.exports = ({ io, PORT })=>{
         res.json({
             ip: require('./get_ip')(PORT),
             history: db.history,
-            current_team: db.current_team,
-            time_remaining: db.time_remaining,
-            status: db.status,
+            current: db.current,
             GAME_TIME: GAME_TIME,
         });
     });

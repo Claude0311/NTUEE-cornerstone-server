@@ -24,17 +24,7 @@ const sample = {
     },
 
     // Current game data
-    current_team: null,
-    time_remaining: GAME_TIME,
-    status: {
-        gamemode: null,
-        //point of current team
-        point: 0,
-        current_sequence_index: 0,
-        last_eaten_time: 0,
-    },
-    cur_game_countdown: null,
-    visited: {},
+    current: []
 };
 
 module.exports = sample
