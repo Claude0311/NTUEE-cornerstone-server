@@ -56,11 +56,13 @@ class HomePage extends Component {
         status: this.props.status,
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
+        // sock
     };
 
     // connect to WS server and listen event
     componentDidMount() {
         this.socket = io();
+        console.log('sc',this.socket)
         // Timer
         // if (this.state.time_remain != this.state.GAME_TIME) {
         //     this.timer = setInterval(() =>
@@ -201,6 +203,7 @@ class HomePage extends Component {
                         <RankBoard history={this.state.history}/>
                     </div>
                     <div className="left">
+                        {console.log('this',this.socket)}
                         <Gamestat game_info={this.state} socket={this.socket}/>
                     </div>
                 </div>

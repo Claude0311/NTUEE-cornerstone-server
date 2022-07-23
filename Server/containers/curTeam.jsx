@@ -27,6 +27,8 @@ export default (props) => {
             if(data.id!==id) return
             clearInterval(timer)
         }
+        console.log('soc',socket)
+        if(socket===undefined) return
         socket.on("update_time", update_time)
         socket.on("UID_added",UID_added)
         socket.on("game_end",game_end)
@@ -38,7 +40,7 @@ export default (props) => {
             socket.off("modify_current_score",UID_added)
             clearInterval(timer)
         }
-    },[])
+    },[socket])
     return <div>
         {isLogin && 
             <Button color="danger" onClick={()=>{
