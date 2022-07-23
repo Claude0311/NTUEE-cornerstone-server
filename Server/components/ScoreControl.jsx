@@ -3,12 +3,12 @@ import { ButtonGroup, Button, Input } from "reactstrap";
 // import fetch from "isomorphic-fetch";
 import { useSelector } from "react-redux";
 
-export default ({team,point})=>{
+export default ({team,point,id})=>{
     const ip = useSelector(state=>state.ip)
     const token = useSelector(state=>state.token)
     const onEdit = ({team,score})=>{
         console.log('tks',token)
-        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&token=${token}`)
+        fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&id=${id}&token=${token}`)
         .then(res => {
             if(!res.ok) {
               return res.text().then(text => { throw new Error(text) })

@@ -24,7 +24,20 @@ const sample = {
     },
 
     // Current game data
-    current: []
+    current: [
+        // {
+        //     id:'ojIckSD2jqNzOqIrAGzL',
+        //     current_team: 'testTeamName',
+        //     time_remaining: 90,
+        //     status: {
+        //         gamemode: 0,
+        //         point: 0,
+        //         last_eaten_time: 0,
+        //     },
+        //     cur_game_countdown: null,
+        //     visited: {},
+        // }
+    ]
 };
 
 module.exports = sample

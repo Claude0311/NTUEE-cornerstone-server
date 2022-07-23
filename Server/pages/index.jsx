@@ -42,7 +42,6 @@ class HomePage extends Component {
         status: {
             gamemode: null,
             point: 0,
-            current_sequence_index: 0,
             last_eaten_time: 0,
         },
         GAME_TIME: 120,
@@ -63,81 +62,82 @@ class HomePage extends Component {
     componentDidMount() {
         this.socket = io();
         // Timer
-        if (this.state.time_remain != this.state.GAME_TIME) {
-            this.timer = setInterval(() =>
-                this.setState((state) => {
-                    if (state.time_remain > 0)
-                        return {
-                            time_remain: state.time_remain - 1,
-                        };
-                    else {
-                        clearInterval(this.timer);
-                        this.timer = null;
-                    }
-                }),
-                1000
-            );
-        }
+        // if (this.state.time_remain != this.state.GAME_TIME) {
+        //     this.timer = setInterval(() =>
+        //         this.setState((state) => {
+        //             if (state.time_remain > 0)
+        //                 return {
+        //                     time_remain: state.time_remain - 1,
+        //                 };
+        //             else {
+        //                 clearInterval(this.timer);
+        //                 this.timer = null;
+        //             }
+        //         }),
+        //         1000
+        //     );
+        // }
         // game events
-        this.socket.on("game_started", (data) => {
-            console.log("game started");
-            this.setState((state) => ({
-                current_team: data.current_team,
-                status: { ...state.status, gamemode: data.gamemode },
-            }));
-            this.timer = setInterval(
-                () =>
-                    this.setState((state) => {
-                        if (state.time_remain > 0)
-                            return {
-                                time_remain: state.time_remain - 1,
-                            };
-                        else {
-                            clearInterval(this.timer);
-                            this.timer = null;
-                        }
-                    }),
-                1000
-            );
-        });
-        this.socket.on("update_time", (data) => {
-            console.log("update time");
-            this.setState(() => ({ time_remain: data.time_remain }));
-        });
-        this.socket.on("UID_added", (data) => {
-            console.log("UID_added");
-            this.setState((state) => ({
-                status: { ...state.status, point: data.point },
-            }));
-        });
+        // this.socket.on("game_started", (data) => {
+        //     console.log("game started");
+        //     this.setState((state) => ({
+        //         current_team: data.current_team,
+        //         status: { ...state.status },
+        //     }));
+        //     this.timer = setInterval(
+        //         () =>
+        //             this.setState((state) => {
+        //                 if (state.time_remain > 0)
+        //                     return {
+        //                         time_remain: state.time_remain - 1,
+        //                     };
+        //                 else {
+        //                     clearInterval(this.timer);
+        //                     this.timer = null;
+        //                 }
+        //             }),
+        //         1000
+        //     );
+        // });
+        // this.socket.on("update_time", (data) => {
+        //     console.log("update time");
+        //     this.setState(() => ({ time_remain: data.time_remain }));
+        // });
+        // this.socket.on("UID_added", (data) => {
+        //     console.log("UID_added");
+        //     this.setState((state) => ({
+        //         status: { ...state.status, point: data.point },
+        //     }));
+        // });
         this.socket.on("game_end", (data) => {
             console.log("game ended");
-            clearInterval(this.timer);
-            this.timer = null;
+            // clearInterval(this.timer);
+            // this.timer = null;
             this.setState((state) => {
                 return {
+                    ...state,
                     time_remain: state.GAME_TIME,
                     history: {
                         ...state.history,
-                        [`${data.gamemode}`]: data.history,
+                        [`${0}`]: data.history,
                     },
                     status: {
                         gamemode: null,
                         point: 0,
-                        current_sequence_index: 0,
                         last_eaten_time: 0,
                     },
                     current_team: "Nobody",
+                    current: state.current.filter(({id})=>id!==data.id)
                 };
             });
         });
         // modify score events (TA functions)
-        this.socket.on("modify_current_score", (data) => {
-            console.log("Score modified");
-            this.setState((state) => ({
-                status: {...state.status, point: data.point},
-            }));
-        });
+        // this.socket.on("modify_current_score", (data) => {
+        //     console.log("Score modified");
+        //     this.setState((state) => ({
+        //         status: {...state.status, point: data.point},
+        //     }));
+        // });
         this.socket.on("modify_history_score", (data) => {
             console.log("Score modified");
             this.setState((state) => ({

@@ -12,10 +12,10 @@ module.exports = ({ io, PORT })=>{
      * @apiGroup Express/GameInfo
      * @apiSuccess (200) {Number} time_remain 剩餘時間
      */
-    router.get("/remain_time", (req, res) => {
-        if(db.current.length<1) return res.json({ time_remain: GAME_TIME });
-        res.json({ time_remain: db.current[0].time_remaining });
-    });
+    // router.get("/remain_time", (req, res) => {
+    //     if(db.current.length<1) return res.json({ time_remain: GAME_TIME });
+    //     res.json({ time_remain: db.current[0].time_remaining });
+    // });
     /**
      * @api {get} /current_score 目前分數
      * @apiGroup Express/GameInfo
@@ -48,7 +48,7 @@ module.exports = ({ io, PORT })=>{
         res.json({
             ip: require('./get_ip')(PORT),
             history: db.history,
-            current: db.current,
+            current: db.current.map(({id,current_team,time_remaining,status})=>({id,current_team,time_remaining,status})),
             GAME_TIME: GAME_TIME,
         });
     });
