@@ -69,6 +69,9 @@ module.exports = ({ io, PORT })=>{
     router_admin.use(isLogin)
     router_admin.get("/reset", require('./reset')({io}))
     router_admin.get("/modify_score", require('./modify_score')({io}))
+    router_admin.get("/modify_time",require("./modify").modify_time({io}))
+    router_admin.get("/uids",require("./modify").getUIDs())
+    router_admin.get("/modify_uids",require("./modify").setUIDs())
 
     router.use('/ta',router_admin)
 

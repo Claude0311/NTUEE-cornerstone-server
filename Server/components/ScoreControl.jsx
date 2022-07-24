@@ -11,7 +11,8 @@ export default ({team,point,id})=>{
         fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&id=${id}&token=${token}`)
         .then(res => {
             if(!res.ok) {
-              return res.text().then(text => { throw new Error(text) })
+                setScore(point)
+                return res.text().then(text => { throw new Error(text) })
             }
             else {
              return res.json();

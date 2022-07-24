@@ -11,7 +11,7 @@
  * @apiSuccess (add points) {Socket.emit} UID_added "Add x pts at y sec"
  * @apiSuccess (add points) {Socket.broadcast} UID_added {point}
  */
-const add_UID = ({uids,socket})=>{
+const add_UID = ({socket})=>{
     return (data) => {
         const team = db.current.find(({id})=>id===socket.id)
         if(team===undefined) return

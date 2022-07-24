@@ -1,4 +1,4 @@
 {
     "verbose": true,
-    "ignore": ["data\\history.json"]
+    "ignore": ["data\\history.json","data\\time.json","data\\uid.json"]
 }

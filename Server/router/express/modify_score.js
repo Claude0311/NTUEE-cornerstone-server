@@ -22,9 +22,11 @@ const fs = require("fs")
 module.exports = ({io})=>{
     return async (req, res) => {
         // a team and score is given -> modify history
+        const score = parseInt(req.query.new_score)
+        if(!score) return res.status(400).json( {msg: "invalid type"} );
         const n = ['undefined',undefined,null,'null']
-        if (!n.includes(req.query.team) && !n.includes(req.query.new_score)) {
-            db.history["0"][req.query.team]["point"] = req.query.new_score
+        if (!n.includes(req.query.team)) {
+            db.history["0"][req.query.team]["point"] = score
             io.emit("modify_history_score", {
                 history: db.history["0"],
             });
@@ -38,15 +40,15 @@ module.exports = ({io})=>{
             res.status(200).json( {msg: "success"} );
         }
         // an id and score is given -> modify current game score
-        else if (!n.includes(req.query.id) && !n.includes(req.query.new_score)) {
+        else if (!n.includes(req.query.id)) {
             const team = db.current.find(({id})=>id===req.query.id)
-            team.status.point = parseInt(req.query.new_score);
-            res.status(201).json( {msg: "success", new_score: team.status.point} );
+            team.status.point = score
+            res.status(201).json( {msg: "success", new_score: score} );
             io.emit("modify_current_score", {
                 id: team.id,
-                point: team.status.point,
+                point: score,
             });
-            console.log(`Score modified to ${team.status.point}`)
+            console.log(`Score modified to ${score}`)
             db.current = db.current.map(data => data.id === team.id ? team : data)
         }
         // other conditions -> error

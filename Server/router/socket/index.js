@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
-module.exports = ({socket,uids,io})=>{
-    socket.on("add_UID", require('./add_uid')({uids,socket}))
+module.exports = ({socket,io})=>{
+    socket.on("add_UID", require('./add_uid')({socket}))
     // on "start_game"
     socket.on("start_game", require('./start_game')({socket,io}))
     // on "stop_game"

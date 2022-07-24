@@ -20,6 +20,7 @@
     "nodemon": "^2.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-json-editor-ajrm": "^2.5.13",
     "react-redux": "^7.2.6",
     "reactstrap": "^8.4.1",
     "redux": "^4.1.2",

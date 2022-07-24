@@ -144,6 +144,10 @@ class HomePage extends Component {
                 },
             }));
         });
+        socket.on("modify_time",({GAME_TIME:newT})=>{
+            console.log("Time modified");
+            this.setState((state) => ({...state,GAME_TIME:newT}));
+        })
     }
 
     // close socket connection
