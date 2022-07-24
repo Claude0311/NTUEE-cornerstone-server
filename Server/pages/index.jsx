@@ -25,11 +25,14 @@ class HomePage extends Component {
         let token = ''
         try{
             console.log(req.headers.cookie)
-            const res = await fetch('http://localhost:3000/ta/isLogin',{headers:{cookie:req.headers.cookie}})
+            const res = await fetch(`http://localhost:3000/ta/isLogin`,{headers:{cookie:req.headers.cookie}})
             if(res.ok) {
                 token = await res.json().token
             }
-        }catch{}
+            console.log('this token',token)
+        }catch (e){
+            console.log(e)
+        }
         const response = await fetch("http://localhost:3000/game_info");
         const data = await response.json();
         return {...data,token};
@@ -138,6 +141,7 @@ class HomePage extends Component {
         socket.on("modify_history_score", (data) => {
             console.log("Score modified");
             this.setState((state) => ({
+                ...state,
                 history: {
                     ...state.history,
                     [`0`]: data.history,

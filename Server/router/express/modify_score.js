@@ -23,7 +23,7 @@ module.exports = ({io})=>{
     return async (req, res) => {
         // a team and score is given -> modify history
         const score = parseInt(req.query.new_score)
-        if(!score) return res.status(400).json( {msg: "invalid type"} );
+        if(!Number.isInteger(score)) return res.status(400).json( {msg: "invalid type"} );
         const n = ['undefined',undefined,null,'null']
         if (!n.includes(req.query.team)) {
             db.history["0"][req.query.team]["point"] = score
