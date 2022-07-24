@@ -28,7 +28,7 @@
     "socket.io-client": "^4.0.2"
   },
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon server.js --config nodemon.json",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "start-win": "set NODE_ENV=production && node server.js",

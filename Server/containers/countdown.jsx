@@ -16,7 +16,8 @@ export default (props) => {
   // });
   let minutes = Math.floor(props.time_remain / 60);
   let show_seconds = props.time_remain - minutes * 60;
+  let msg = props.msg || "剩餘時間"
   return (
-      <h2>剩餘時間: {minutes} 分 {show_seconds} 秒</h2>
+      <h2>{msg}: {minutes} 分 {show_seconds} 秒</h2>
   );
 };

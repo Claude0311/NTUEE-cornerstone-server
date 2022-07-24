@@ -14,6 +14,7 @@
 const add_UID = ({uids,socket})=>{
     return (data) => {
         const team = db.current.find(({id})=>id===socket.id)
+        if(team===undefined) return
         console.log("UID:",data.uid_str);
         //convert to upper case
         data.uid_str = data.uid_str.toUpperCase();

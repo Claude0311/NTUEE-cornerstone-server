@@ -35,7 +35,7 @@ module.exports = ({io})=>{
                     console.log("history filewrite complete");
                 }
             });
-            res.status(200).json( {msg: "success", new_score: db.status.point} );
+            res.status(200).json( {msg: "success"} );
         }
         // an id and score is given -> modify current game score
         else if (!n.includes(req.query.id) && !n.includes(req.query.new_score)) {

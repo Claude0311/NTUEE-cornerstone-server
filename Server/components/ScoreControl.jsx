@@ -22,7 +22,6 @@ export default ({team,point,id})=>{
           });
     }
     const [modifying, setMod] = useState(false)
-    console.log(`new point ${point}`)
     const [newScore,setScore] = useState(point)
     const ok = ()=>{
         setMod(false)

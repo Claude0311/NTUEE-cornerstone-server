@@ -38,7 +38,7 @@ module.exports = ({io, socket})=>{
         io.emit("game_started", {
             id: socket.id,
             current_team: newMem.current_team,
-            gamemode: db.status.gamemode,
+            gamemode: 0,
         });
         console.log("start game");
         console.log("Start time:", new Date().toString().slice(0, 24));

@@ -56,13 +56,15 @@ class HomePage extends Component {
         status: this.props.status,
         history: this.props.history,
         GAME_TIME: this.props.GAME_TIME,
-        // sock
+        socket: null
     };
 
     // connect to WS server and listen event
     componentDidMount() {
-        this.socket = io();
-        console.log('sc',this.socket)
+        const socket = io();
+        this.setState(state=>{
+            return {...state,socket}
+        })
         // Timer
         // if (this.state.time_remain != this.state.GAME_TIME) {
         //     this.timer = setInterval(() =>
@@ -80,27 +82,21 @@ class HomePage extends Component {
         //     );
         // }
         // game events
-        // this.socket.on("game_started", (data) => {
-        //     console.log("game started");
-        //     this.setState((state) => ({
-        //         current_team: data.current_team,
-        //         status: { ...state.status },
-        //     }));
-        //     this.timer = setInterval(
-        //         () =>
-        //             this.setState((state) => {
-        //                 if (state.time_remain > 0)
-        //                     return {
-        //                         time_remain: state.time_remain - 1,
-        //                     };
-        //                 else {
-        //                     clearInterval(this.timer);
-        //                     this.timer = null;
-        //                 }
-        //             }),
-        //         1000
-        //     );
-        // });
+        socket.on("game_started", (data) => {
+            console.log("game started");
+            this.setState((state) => {
+                const newMem = {
+                    id:data.id,
+                    current_team:data.current_team,
+                    time_remain:state.GAME_TIME,
+                    status:{point:0}
+                }
+                return {
+                    ...state,
+                    current:[...state.current,newMem]
+                }
+            })
+        });
         // this.socket.on("update_time", (data) => {
         //     console.log("update time");
         //     this.setState(() => ({ time_remain: data.time_remain }));
@@ -111,24 +107,24 @@ class HomePage extends Component {
         //         status: { ...state.status, point: data.point },
         //     }));
         // });
-        this.socket.on("game_end", (data) => {
+        socket.on("game_end", (data) => {
             console.log("game ended");
             // clearInterval(this.timer);
             // this.timer = null;
             this.setState((state) => {
                 return {
                     ...state,
-                    time_remain: state.GAME_TIME,
+                    // time_remain: state.GAME_TIME,
                     history: {
                         ...state.history,
                         [`${0}`]: data.history,
                     },
-                    status: {
-                        gamemode: null,
-                        point: 0,
-                        last_eaten_time: 0,
-                    },
-                    current_team: "Nobody",
+                    // status: {
+                    //     gamemode: null,
+                    //     point: 0,
+                    //     last_eaten_time: 0,
+                    // },
+                    // current_team: "Nobody",
                     current: state.current.filter(({id})=>id!==data.id)
                 };
             });
@@ -140,7 +136,7 @@ class HomePage extends Component {
         //         status: {...state.status, point: data.point},
         //     }));
         // });
-        this.socket.on("modify_history_score", (data) => {
+        socket.on("modify_history_score", (data) => {
             console.log("Score modified");
             this.setState((state) => ({
                 history: {
@@ -153,7 +149,7 @@ class HomePage extends Component {
 
     // close socket connection
     componentWillUnmount() {
-        this.socket.close();
+        this.state.socket.close();
     }
 
     // // add messages from server to the state
@@ -203,8 +199,7 @@ class HomePage extends Component {
                         <RankBoard history={this.state.history}/>
                     </div>
                     <div className="left">
-                        {console.log('this',this.socket)}
-                        <Gamestat game_info={this.state} socket={this.socket}/>
+                        <Gamestat game_info={this.state} socket={this.state.socket}/>
                     </div>
                 </div>
             </div>

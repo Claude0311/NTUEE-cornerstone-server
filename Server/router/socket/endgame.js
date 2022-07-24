@@ -8,8 +8,9 @@ const fs = require("fs");
  * @apiSuccess {Socket.emit} game_end 
  * @apiSuccess {Socket.broadcast} game_end {history, gamemode}
  */
-module.exports = endgame = ({socket,io}) => {
-    const team = db.current.find(({id})=>id===socket.id)
+module.exports = endgame = ({socket,io,id:taid}) => {
+    const team = db.current.find(({id})=>(id===socket.id)||(id===taid))
+    if(team===undefined) return console.log('stop game id not found')
     clearInterval(team.cur_game_countdown);
     console.log("game ended");
     console.log(
@@ -36,7 +37,7 @@ module.exports = endgame = ({socket,io}) => {
         gamemode: team.status.gamemode,
     });
     // reset the active game status
-    db.current = db.current.filter(({id})=>id!==socket.id)
+    db.current = db.current.filter(({id})=>id!==team.id)
     // write database from memory into file ('./data/history.json)
     fs.writeFile("./data/history.json", JSON.stringify(db.history), (err) => {
         if (err) {

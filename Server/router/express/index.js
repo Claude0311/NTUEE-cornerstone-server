@@ -48,7 +48,7 @@ module.exports = ({ io, PORT })=>{
         res.json({
             ip: require('./get_ip')(PORT),
             history: db.history,
-            current: db.current.map(({id,current_team,time_remaining,status})=>({id,current_team,time_remaining,status})),
+            current: db.current.map(({id,current_team,time_remaining,status})=>({id,current_team,time_remain:time_remaining,status})),
             GAME_TIME: GAME_TIME,
         });
     });

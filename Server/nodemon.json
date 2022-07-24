@@ -1,3 +1,4 @@
 {
-    "ignore": ["./data/history.json"]
+    "verbose": true,
+    "ignore": ["data\\history.json"]
 }

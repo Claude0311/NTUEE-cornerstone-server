@@ -2,19 +2,32 @@ import { ListGroup, ListGroupItem, Container, Button } from "reactstrap";
 import Countdown from "./countdown";
 import ScoreControl from "../components/ScoreControl";
 import {useSelector} from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
-export default (props) => {
+export default ({props}) => {
     const { id, time_remain, status, current_team, socket } = props
     const [t,setT] = useState(time_remain)
     const [p,setP] = useState(status.point)
     const isLogin = useSelector(state=>state.isLogin)
     const token = useSelector(state=>state.token)
+    let timer = null
+    console.log('rerender curTeam',current_team,time_remain,timer,t)
     useEffect(()=>{
-        let timer = setInterval(()=>{
-            if(t>0) setT(t-1)
-            else clearInterval(timer)
+        timer = setInterval(()=>{
+            setT(t=>{
+                if(t>0) return t-1
+                clearInterval(timer)
+                return 0
+            })
         },1000)
+        console.log('reg timer',current_team,timer)
+        return ()=>{
+            console.log('clr timer 2')
+            clearInterval(timer)
+        }
+    },[])
+    useEffect(()=>{
+        if(socket===null) return
         const update_time = (data) => {
             if(data.id!==id) return
             setT(data.time_remain)
@@ -27,31 +40,29 @@ export default (props) => {
             if(data.id!==id) return
             clearInterval(timer)
         }
-        console.log('soc',socket)
-        if(socket===undefined) return
         socket.on("update_time", update_time)
         socket.on("UID_added",UID_added)
         socket.on("game_end",game_end)
         socket.on("modify_current_score",UID_added)
         return ()=>{
+            if(socket===null) return
             socket.off("update_time", update_time)
             socket.off("UID_added",UID_added)
             socket.off("game_end",game_end)
             socket.off("modify_current_score",UID_added)
-            clearInterval(timer)
         }
-    },[socket])
+    },[socket,id])
     return <div>
         {isLogin && 
             <Button color="danger" onClick={()=>{
-                socket.emit("stop_game",{token})
+                socket.emit("stop_game",{token,id})
             }}>Stop game</Button>
         }
         <div className="info">
             <h2>現在隊伍: {current_team}</h2>    
         </div>
         <div className="info">
-            <Countdown time_remain={time_remain} />
+            <Countdown time_remain={t} />
         </div>
         <span className="info" >
             <h3 style={{display: 'flex',
