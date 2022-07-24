@@ -11,7 +11,6 @@ export default ({props}) => {
     const isLogin = useSelector(state=>state.isLogin)
     const token = useSelector(state=>state.token)
     let timer = null
-    console.log('rerender curTeam',current_team,time_remain,timer,t)
     useEffect(()=>{
         timer = setInterval(()=>{
             setT(t=>{
@@ -20,9 +19,7 @@ export default ({props}) => {
                 return 0
             })
         },1000)
-        console.log('reg timer',current_team,timer)
         return ()=>{
-            console.log('clr timer 2')
             clearInterval(timer)
         }
     },[])
@@ -74,7 +71,7 @@ export default ({props}) => {
                     <ScoreControl team={null} point={p} id={id}/>
                 </table>
                 :
-                status.point
+                p
                 }
             </h3>
         </span>

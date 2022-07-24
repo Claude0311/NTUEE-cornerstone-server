@@ -16,9 +16,12 @@ const endgame = require('./endgame')
  */
 module.exports = ({io, socket})=>{
     return (data) => {
-        if(db.current.some(({current_team})=>current_team===data.team)){
-            const {time_remaining:time_remain} = db.current.find(({current_team})=>current_team===data.team)
-            socket.emit("game_already_started", {time_remain})
+        const curTeam = db.current.find(({current_team})=>current_team===data.team)
+        if(curTeam){
+            socket.emit("game_already_started", {
+                current_team:curTeam.current_team,
+                time_remain: curTeam.time_remaining
+            })
             return
         }
         const newMem = {

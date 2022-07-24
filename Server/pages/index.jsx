@@ -32,7 +32,6 @@ class HomePage extends Component {
         }catch{}
         const response = await fetch("http://localhost:3000/game_info");
         const data = await response.json();
-        console.log('data',data)
         return {...data,token};
     }
     static defaultProps = {

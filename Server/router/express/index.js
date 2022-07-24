@@ -23,7 +23,9 @@ module.exports = ({ io, PORT })=>{
      */
     router.get("/current_score", (req, res) => {
         if(db.current.length<1) return res.json({ current_score: 0 });
-        res.json({ current_score: db.current[0].status.point });
+        let team = db.current.find(({id})=>id===req.query.id)
+        if(!team) team = db.current[0]
+        res.json({ current_score: team.status.point });
     });
     /**
      * @api {get} /game_status 分數和時間
@@ -33,10 +35,9 @@ module.exports = ({ io, PORT })=>{
      */
     router.get("/game_status", (req, res) => {
         if(db.current.length<1) return res.json({ current_team: "NONE", time_remain: GAME_TIME})
-        res.json({
-            current_team: db.current[0].current_team,
-            time_remain: db.current[0].time_remaining,
-        });
+        let team = db.current.find(({id})=>id===req.query.id)
+        if(!team) team = db.current[0]
+        res.json({current_team:team.current_team,time_remain:team.time_remaining})
     });
     /**
      * @api {get} /game_info 詳細資訊

@@ -15,6 +15,7 @@ module.exports = (PORT) => {
                 }
             }
         }
+        console.log('For first setup, set wifi=... in .env based on:')
         console.log(results)
         const wifi = process.env["wifi"] || 'Wi-Fi'
         return results[wifi][0]

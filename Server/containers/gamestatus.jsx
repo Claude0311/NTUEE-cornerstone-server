@@ -10,8 +10,8 @@ export default (props) => {
         <div className="status">
             <div className="info">
                 <Countdown time_remain={GAME_TIME} msg={"比賽時間"}/>
-                <br></br>
             </div>
+            <br></br>
             {
                 current.map((p)=><CurTeam key={p.id} props={{...p,socket}}/>)
             }
