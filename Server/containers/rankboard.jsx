@@ -4,7 +4,7 @@ import {Button} from 'reactstrap';
 import fetch from "isomorphic-fetch";
 import {useSelector} from 'react-redux';
 
-export default (props) => {
+const RankBoard = (props) => {
     const isLogin = useSelector(state=>state.isLogin)
     const token = useSelector(state=>state.token)
     const ip = useSelector(state=>state.ip)
@@ -19,3 +19,5 @@ export default (props) => {
         </div>
     );
 };
+
+export default RankBoard

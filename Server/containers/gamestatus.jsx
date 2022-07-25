@@ -4,7 +4,7 @@ import Countdown from "./countdown";
 import TimeControl from "../components/TimeControl";
 import { useSelector } from "react-redux";
 
-export default (props) => {
+const GameStatus = (props) => {
     // const current = [{ time_remain:90, status:{point:0}, current_team:"Nobody" },{ time_remain:90, status:{point:0}, current_team:"Nobody" },{ time_remain:90, status:{point:0}, current_team:"Nobody" }]
     const { GAME_TIME, current } = props.game_info;
     const socket = props.socket
@@ -27,3 +27,5 @@ export default (props) => {
         </div>
     );
 };
+
+export default GameStatus

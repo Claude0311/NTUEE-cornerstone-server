@@ -1,5 +1,5 @@
 import {useDispatch,useSelector} from 'react-redux';
-export default ({ip,token}) => {
+const Init = ({ip,token}) => {
     const dispatch = useDispatch()
     if(token){
         dispatch({type:'login',payload:true})
@@ -8,3 +8,5 @@ export default ({ip,token}) => {
     dispatch({type:'setIp',payload:ip})
     return (<></>);
 };
+
+export default Init;

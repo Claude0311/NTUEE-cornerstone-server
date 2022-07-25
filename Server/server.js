@@ -39,7 +39,7 @@ nextApp.prepare().then(() => {
 
     server.listen(PORT,'0.0.0.0', (err) => {
         if (err) throw err;
-        console.log('dev',dev)
+        console.log(dev?'development mode':'production mode')
         console.log(`> Ready on http://localhost:${PORT}`);
     });
 });

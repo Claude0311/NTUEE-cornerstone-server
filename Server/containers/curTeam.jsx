@@ -4,7 +4,7 @@ import ScoreControl from "../components/ScoreControl";
 import {useSelector} from 'react-redux';
 import { useEffect, useState, memo } from "react";
 
-export default ({props}) => {
+const Cur = ({props}) => {
     const { id, time_remain, status, current_team, socket } = props
     const [t,setT] = useState(time_remain)
     const [p,setP] = useState(status.point)
@@ -78,3 +78,5 @@ export default ({props}) => {
         <br></br>
     </div>
 }
+
+export default Cur

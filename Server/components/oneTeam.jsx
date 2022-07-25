@@ -18,7 +18,7 @@ const colors = [
     "black",
 ];
 
-export default ({team, tbkey:key, isLogin}) => {
+const OneTeam = ({team, tbkey:key, isLogin}) => {
     // const isLogin = useSelector(state=>state.isLogin)
     return (
     <tr key={key}>
@@ -54,3 +54,5 @@ export default ({team, tbkey:key, isLogin}) => {
         </td>
     </tr>
 )};
+
+export default OneTeam

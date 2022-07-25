@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ListGroupItem } from "reactstrap";
 
-export default (props) => {
+const Count = (props) => {
   // let [seconds, setseconds] = useState(120);
   // useEffect(() => {
   //   const timer = setInterval(
@@ -21,3 +21,5 @@ export default (props) => {
       <h2>{msg}: {minutes} 分 {show_seconds} 秒</h2>
   );
 };
+
+export default Count

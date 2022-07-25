@@ -24,7 +24,6 @@ class HomePage extends Component {
     static async getInitialProps({ req }) {
         let token = ''
         try{
-            console.log(req.headers.cookie)
             const res = await fetch(`http://localhost:3000/ta/isLogin`,{headers:{cookie:req.headers.cookie}})
             if(res.ok) {
                 token = (await res.json()).token

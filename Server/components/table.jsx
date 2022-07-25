@@ -11,7 +11,7 @@ function sort_rank(team1, team2) {
         return team2.last_eaten - team1.last_eaten;
     }
 }
-export default (props) => {
+const MyTable = (props) => {
     const isLogin = useSelector(state=>state.isLogin)
     const { history } = props;
     let ranklist = [];
@@ -43,3 +43,5 @@ export default (props) => {
         </Table>
     );
 };
+
+export default MyTable

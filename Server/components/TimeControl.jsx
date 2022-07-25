@@ -132,7 +132,7 @@ const UIDs = ({setModUID})=>{
     </>
 }
 
-export default ({GAME_TIME})=>{
+const TAControl = ({GAME_TIME})=>{
     const [modUID, setModUID] = useState(false)
     return <>
     <div className="info">
@@ -145,3 +145,5 @@ export default ({GAME_TIME})=>{
     }
     </>
 }
+
+export default TAControl

@@ -4,7 +4,7 @@ import fetch from "isomorphic-fetch";
 import {useSelector, useDispatch} from 'react-redux';
 import Cookies from 'js-cookie'
 
-export default () => {
+const Login = () => {
     const ip = useSelector(state=>state.ip)
     const isLogin = useSelector(state=>state.isLogin)
     const dispatch = useDispatch()
@@ -58,3 +58,5 @@ export default () => {
         </div>
     );
 }
+
+export default Login;

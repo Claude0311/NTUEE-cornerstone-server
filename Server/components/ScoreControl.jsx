@@ -3,7 +3,7 @@ import { ButtonGroup, Button, Input } from "reactstrap";
 // import fetch from "isomorphic-fetch";
 import { useSelector } from "react-redux";
 
-export default ({team,point,id})=>{
+const ScoreControl = ({team,point,id})=>{
     const ip = useSelector(state=>state.ip)
     const token = useSelector(state=>state.token)
     const onEdit = ({team,score})=>{
@@ -69,3 +69,5 @@ export default ({team,point,id})=>{
         </>
     }
 }
+
+export default ScoreControl

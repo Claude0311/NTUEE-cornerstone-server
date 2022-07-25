@@ -22,7 +22,6 @@ module.exports.setUIDs = ()=>{
     return async (req,res)=>{
         let newuids = {}
         try{
-            console.log(req.query.uids)
             newuids = JSON.parse(req.query.uids)
         }catch{
             return res.status(400).json( {msg: "invalid type"} );
