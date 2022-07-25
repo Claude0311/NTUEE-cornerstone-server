@@ -10,7 +10,6 @@ const Time = ({GAME_TIME,setModUID, modUID})=>{
     const token = useSelector(state=>state.token)
     
     const onEdit = ({time})=>{
-        console.log('tks',token)
         fetch(`${ip}/ta/modify_time?time=${time}&token=${token}`)
         .then(res => {
             if(!res.ok) {
@@ -38,15 +37,15 @@ const Time = ({GAME_TIME,setModUID, modUID})=>{
         }
     }
     if(modifying){
-        return <table style={{display:"inline-table"}}>
-        <td className="rank" style={{ verticalAlign: "middle"}}>比賽時間: </td>
-        <td className="rank" style={{ verticalAlign: "middle"}}>
-            <Input value={newTime} onChange={(e)=>{
-                console.log('e.target.value',e.target.value)
-                setTime(e.target.value)
-                }} onKeyPress={handleKeyPress}/>
-        </td>
-        <td className="rank" style={{ verticalAlign: "middle"}}>秒{' '}</td>
+        return <div style={{display: "flex"}}>
+        <h3>比賽時間: </h3>
+        <div style={{width:"25%"}}>
+            <Input
+                value={newTime} onKeyPress={handleKeyPress}
+                onChange={(e)=>{setTime(e.target.value)}} 
+            />
+        </div>
+        <h3>秒{' '}</h3>
         <ButtonGroup>
             <Button  color="warning" onClick={ok}>
                 ok
@@ -55,7 +54,7 @@ const Time = ({GAME_TIME,setModUID, modUID})=>{
                 cancel
             </Button>
         </ButtonGroup>
-        </table>
+        </div>
     }else{
         return <h2>
             比賽時間: {Math.floor(newTime / 60)} 分 {newTime - Math.floor(newTime / 60) * 60} 秒{' '}
@@ -82,7 +81,6 @@ const UIDs = ({setModUID})=>{
     const [able,setAble] = useState(true)
     const [errmsg,setMsg] = useState("")
     const onEdit = ()=>{
-        console.log(uid)
         fetch(`${ip}/ta/modify_uids?uids=${JSON.stringify(uid)}&token=${token}`).then(res => {
             if(!res.ok) {
                 return res.text().then(text => { throw new Error(text) })
@@ -102,10 +100,8 @@ const UIDs = ({setModUID})=>{
         onEdit()
     }
     useEffect(()=>{
-        console.log('getUIDs')
         fetch(`${ip}/ta/uids?token=${token}`).then(async data=>{
             const d = await data.json()
-            console.log(d)
             setUid(d)
         })
     },[])
@@ -124,7 +120,7 @@ const UIDs = ({setModUID})=>{
         locale      = { locale }
         height      = 'auto'
         onChange={({plainText,error,jsObject})=>{
-            console.log(plainText)
+            // console.log(plainText)
             if(error) {
                 setAble(false)
                 return

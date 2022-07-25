@@ -7,7 +7,6 @@ export default ({team,point,id})=>{
     const ip = useSelector(state=>state.ip)
     const token = useSelector(state=>state.token)
     const onEdit = ({team,score})=>{
-        console.log('tks',token)
         fetch(`${ip}/ta/modify_score?team=${team}&new_score=${score}&id=${id}&token=${token}`)
         .then(res => {
             if(!res.ok) {

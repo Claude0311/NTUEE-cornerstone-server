@@ -21,14 +21,12 @@ module.exports.login = (req,res)=>{
 require('dotenv').config()
 module.exports.isLogin = (req,res,next)=>{
     const token = req.query.token || req.cookies.token
-    console.log('ck',req.cookies,token)
     jwt.verify(token, jwt_secret_key, (err, decoded) => {
         if(
             err
              && process.env.forstu !== "y"
         ) return res.status(403).send('not login')
         req.acc_token = token
-        console.log('tokenpass')
         next()
     })
 }
